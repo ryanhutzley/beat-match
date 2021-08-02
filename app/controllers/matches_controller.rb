@@ -24,8 +24,17 @@ class MatchesController < ApplicationController
         render json: {error: e.record.errors.full_messages}, status: :unprocessable_entity
     end
 
+    
     def destroy
-
+        user = User.find(session[:user_id])
+        type = user.user_type
+        if type == 'Rapper'
+            match = user.producer_matches.where(producer_id: params[:id]).first
+        else
+            match = user.rapper_matches.where(rapper_id: params[:id]).first
+        end
+        match.destroy
+        head :no_content
     end
 
     private
