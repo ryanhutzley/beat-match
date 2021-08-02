@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :matches
+  resources :matches, except: [:update]
   resources :tracks
   resources :users
   # Routing logic: fallback requests for React Router.
