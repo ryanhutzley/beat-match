@@ -1,5 +1,5 @@
 class TracksController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with :render_not_found
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     def index
         tracks = Track.all
@@ -40,5 +40,9 @@ class TracksController < ApplicationController
 
     def track_params
         params.require(:track).permit(:id, :user_id, :title, :song_url, :genres)
+    end
+    def render_not_found
+        render json: {error: "Not Found"}, status: 404
+    end
 
 end

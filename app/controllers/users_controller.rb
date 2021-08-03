@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with :render_not_found
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     # skip_before_action :authorize, only: [:create]
         users = User.all
         render json: users
