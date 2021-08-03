@@ -23,8 +23,9 @@ function NavBar({ user }) {
                         <Nav.Link as={Link} to="/login" >
                         Login
                         </Nav.Link>
-                        <p></p>
-                        
+                        <p>
+                            {user}
+                        </p>
                     </Nav>
                 </Container>
             </Navbar>
