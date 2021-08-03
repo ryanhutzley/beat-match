@@ -26,7 +26,7 @@ function App() {
     getUser()
   }, [])
 
-  if (!user) return <Login onLogin={setUser} />;
+  // if (!user) return <Redirect to="/login" />;
 
   return (
     <div className="App">
@@ -39,7 +39,7 @@ function App() {
         <Route exact path = "/profile" component={() => <Profile />}/>
           {/* {user ? <Profile /> : <Redirect to="/login" />} */}
         {/* </Route> */}
-        <Route exact path = "/login" component={() => <Login />}/>
+        <Route exact path = "/login" component={() => <Login onLogin={setUser}/>}/>
           {/* <Login /> */}
         {/* </Route> */}
         <Route exact path = "/" component={() => <Swipe />}/>

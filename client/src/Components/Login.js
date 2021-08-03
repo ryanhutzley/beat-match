@@ -22,25 +22,41 @@ function Login({ onLogin }) {
             user_type,
             age: parseInt(age),
             bio,
-            password: password
-
+            password
         }
         const res = await fetch("/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(userData)
         })
-        const json = await res.json()
+        const data = await res.json()
         if (res.ok) {
-            onLogin(res)
+            onLogin(data)
             history.push("/")
         } else {
-            setErrors(res.errors)
+            setErrors(data.errors)
         }
     }
 
-    function handleLogin() {
-
+    async function handleLogin(e) {
+        e.preventDefault()
+        const credentials = {
+            username,
+            password
+        }
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(credentials)
+        })
+        const data = await res.json()
+        if (res.ok) {
+          onLogin(data)
+          history.push("/")
+        } else {
+            console.log(data)
+            setErrors(data.errors)
+        }
     }
 
 
@@ -76,6 +92,11 @@ function Login({ onLogin }) {
                                         {/* <div className="mt-4 pt-2">
                                             <input className="btn btn-primary btn-lg" type="button" value="New to BeatMatch? Create Your Profile!" onClick={() => setExistingUser(!existingUser)} />
                                         </div> */}
+                                        {errors !== [] ? 
+                                        (<div>
+                                            {errors.map((error, index)=> (<p key={index}>{error}</p>))}
+                                        </div>)
+                                        : null}
                                     </div>
                                 </form>
                             </div>
@@ -178,6 +199,11 @@ function Login({ onLogin }) {
 
                         </form>
                     </div>
+                    {errors !== [] ? 
+                    (<div>
+                        {errors.map((error, index)=> (<p key={index}>{error}</p>))}
+                    </div>)
+                    : null}
                     </div>
                 </div>
                 </div>
