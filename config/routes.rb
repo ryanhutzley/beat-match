@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :tracks
   resources :users, except: [:show, :create]
 
-  get "/signup", to: "users#create"
+  post "/signup", to: "users#create"
   get "/me", to: "users#show"
   post "login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

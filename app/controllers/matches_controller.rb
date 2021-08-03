@@ -41,7 +41,7 @@ class MatchesController < ApplicationController
 
 
     def match_params
-        params.require(:match).permit(:rapper_id, :producer_id)
+        params.permit(:rapper_id, :producer_id)
     end
 
     def render_not_found

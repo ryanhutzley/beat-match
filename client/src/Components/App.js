@@ -23,6 +23,7 @@ function App() {
         setUser(json)
       }
     }
+    getUser()
   }, [])
 
   if (!user) return <Login onLogin={setUser} />;

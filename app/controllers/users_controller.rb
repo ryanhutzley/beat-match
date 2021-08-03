@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     # skip_before_action :authorize, only: [:create]
+
+    # wrap_parameters :user, include: [:username, :password, :age, :bio, :password_confirmation]
+
+    def index
         users = User.all
         render json: users
     end
@@ -16,6 +20,7 @@ class UsersController < ApplicationController
 
     def create
         user = User.create(user_params)
+        byebug
         if user.valid?
             session[:user_id] = user.id
             render json: user, status: :created
@@ -44,7 +49,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :user_type, :age, :bio, :password)
+        params.permit(:username, :user_type, :age, :bio, :password)
     end
 
     def render_not_found

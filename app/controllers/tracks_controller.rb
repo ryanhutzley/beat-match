@@ -39,7 +39,7 @@ class TracksController < ApplicationController
     private
 
     def track_params
-        params.require(:track).permit(:id, :user_id, :title, :song_url, :genres)
+        params.permit(:id, :user_id, :title, :song_url, :genres)
     end
     def render_not_found
         render json: {error: "Not Found"}, status: 404
