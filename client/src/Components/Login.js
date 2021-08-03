@@ -71,8 +71,8 @@ function Login({ onLogin }) {
                             <div className="card-body p-4 p-md-5">
                                 <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">BeatMatch Login</h3>
                                 <form onSubmit={handleLogin}>
-                                    <div className="row">
-                                        <div className="col-md-6 mb-4">
+                                    <div className="row ">
+                                        <div className="col-md-6 mb-4" >
 
                                             <div className="form-outline">
                                                 <input type="text" id="username" className="form-control form-control-lg" value={username} onChange={e => setUsername(e.target.value)}/>
@@ -83,6 +83,15 @@ function Login({ onLogin }) {
                                                 <input type="password" id="password" className="form-control form-control-lg" value={password} onChange={e => setPassword(e.target.value)}/>
                                                 <label className="form-label" htmlFor="password">Password</label>
                                             </div>
+
+                                            <br></br>
+                                        {/* error display */}
+                                        {errors !== [] ? 
+                                        (<div>
+                                            {errors.map((error, index)=> (<p style={{color: 'red'}} key={index}>{error}</p>))}
+                                        </div>)
+                                        : null}
+
                                         </div>
                                         <div className="mt-4 pt-2">
                                             <input className="btn btn-primary btn-lg" type="submit" value="Submit" /> {" "}
@@ -92,11 +101,7 @@ function Login({ onLogin }) {
                                         {/* <div className="mt-4 pt-2">
                                             <input className="btn btn-primary btn-lg" type="button" value="New to BeatMatch? Create Your Profile!" onClick={() => setExistingUser(!existingUser)} />
                                         </div> */}
-                                        {errors !== [] ? 
-                                        (<div>
-                                            {errors.map((error, index)=> (<p key={index}>{error}</p>))}
-                                        </div>)
-                                        : null}
+                                        
                                     </div>
                                 </form>
                             </div>
@@ -201,7 +206,7 @@ function Login({ onLogin }) {
                     </div>
                     {errors !== [] ? 
                     (<div>
-                        {errors.map((error, index)=> (<p key={index}>{error}</p>))}
+                        {errors.map((error, index)=> (<p style={{color: 'red'}} key={index}>{error}</p>))}
                     </div>)
                     : null}
                     </div>

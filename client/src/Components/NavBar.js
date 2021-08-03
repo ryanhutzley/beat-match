@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Navbar, Container, Nav, NavItem } from "react-bootstrap"
 
-function NavBar() {
+function NavBar({ user }) {
     return (
         <header>
             <Navbar className="navbar" expand="lg" variant="primary">
@@ -20,6 +20,11 @@ function NavBar() {
                         <Nav.Link as={Link} to="/login" >
                         Login
                         </Nav.Link>
+                        <Nav.Link as={Link} to="/login" >
+                        Login
+                        </Nav.Link>
+                        <p></p>
+                        
                     </Nav>
                 </Container>
             </Navbar>
