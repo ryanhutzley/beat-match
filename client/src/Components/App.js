@@ -9,11 +9,13 @@ import Profile from './Profile';
 
 //importing react modules
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-dom'
+import { Redirect } from 'react-router-dom'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function App() {
   const [user, setUser] = useState(null)
+  let history = useHistory()
 
   useEffect(() => {
     async function getUser() {
@@ -21,30 +23,39 @@ function App() {
       if (res.ok) {
         const json = await res.json()
         setUser(json)
+        history.push("/")
       }
     }
     getUser()
   }, [])
 
-  // if (!user) return <Redirect to="/login" />;
+  async function logOut() {
+    const res = await fetch("/logout", {
+      method: "DELETE"
+    })
+    if (res.ok) {
+      setUser(null)
+      history.push("/login")
+    }
+  }
 
   return (
     <div className="App">
-      <NavBar user = {user}/>
+      <NavBar user = {user} logOut = {logOut}/>
 
       <Switch>
-        <Route exact path = "/matches" component={() => <Matches />}/>
-          {/* {user ? <Matches /> : <Redirect to="/login" />} */}
-        {/* </Route> */}
-        <Route exact path = "/profile" component={() => <Profile />}/>
-          {/* {user ? <Profile /> : <Redirect to="/login" />} */}
-        {/* </Route> */}
-        <Route exact path = "/login" component={() => <Login onLogin={setUser}/>}/>
-          {/* <Login /> */}
-        {/* </Route> */}
-        <Route exact path = "/" component={() => <Swipe />}/>
-          {/* {user ? <Swipe /> : <Redirect to="/login" />}
-        </Route> */}
+        <Route exact path = "/matches">
+          {user ? <Matches /> : <Redirect to="/login" />}
+        </Route>
+        <Route exact path = "/profile">
+          {user ? <Profile user={user}/> : <Redirect to="/login" />}
+        </Route>
+        <Route exact path = "/login">
+          <Login onLogin={setUser}/>
+        </Route> 
+        <Route exact path = "/">
+          {user ? <Swipe /> : <Redirect to="/login" />}
+         </Route>
       </Switch>
     </div>
   );

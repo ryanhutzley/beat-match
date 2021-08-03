@@ -1,7 +1,15 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Navbar, Container, Nav, NavItem } from "react-bootstrap"
+import { useHistory } from 'react-router-dom'
 
-function NavBar({ user }) {
+function NavBar({ user, logOut }) {
+
+    function handleLogout(e) {
+        if (user) {
+            logOut()
+        }
+    }
+
     return (
         <header>
             <Navbar className="navbar" expand="lg" variant="primary">
@@ -17,17 +25,14 @@ function NavBar({ user }) {
                         <Nav.Link as={Link} to="/profile">
                         Profile
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/login" >
-                        Login
+                        <Nav.Link as={Link} onClick = {handleLogout} to="/login" >
+                        {user ? "Logout" : "Login"}
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/login" >
-                        Login
-                        </Nav.Link>
-                        <p>
-                            {user}
-                        </p>
                     </Nav>
                 </Container>
+            <h3 style={{'fontSize': 'medium'}}>
+                {user ? `Welcome, ${user.username}` : null}
+            </h3>
             </Navbar>
         </header>
     )
