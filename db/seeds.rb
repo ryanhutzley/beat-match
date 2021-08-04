@@ -23,11 +23,20 @@ User.all.each do |r|
     Track.create(user_id: r.id, title: Faker::Ancient.god, song_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", genres: "Techno, Classical, Grunge")
 end
 
-LikedUser.create(requester_id: 1, requestee_id: 11)
-LikedUser.create(requester_id: 1, requestee_id: 14)
+
+LikedUser.create(id: 5, user_id: 2)
+LikedUser.create(id: 6, user_id: 2)
+LikedUser.create(id: 1, user_id: 2)
+
+LikedUser.create(id: 2, user_id: 1)
+LikedUser.create(id: 1, user_id: 2)
+LikedUser.create(id: 7, user_id: 1)
+LikedUser.create(id: 9, user_id: 1)
 
 
-# LikedUser.create(rapper_id: 1, producer_id: 12)
+
+
+# Match.create(rapper_id: 1, producer_id: 12)
 # LikedUser.create(rapper_id: 2, producer_id: 13)
 # LikedUser.create(rapper_id: 2, producer_id: 14)
 # LikedUser.create(rapper_id: 3, producer_id: 15)
