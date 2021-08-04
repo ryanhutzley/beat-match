@@ -5,8 +5,14 @@ class UsersController < ApplicationController
     # wrap_parameters :user, include: [:username, :password, :age, :bio, :password_confirmation]
 
     def index
-        users = User.all
-        render json: users
+        user = User.find_by(id: session[:user_id])
+        if user.user_type == "Rapper"
+            users = User.where(user_type: "Producer")
+            render json: users
+        else
+            users = User.where(user_type: "Rapper")
+            render json: users
+        end
     end
 
     def show
@@ -43,6 +49,12 @@ class UsersController < ApplicationController
         user.session.delete
         user.destroy
         head :no_content
+    end
+
+    def matches
+        user = User.find_by(id: session[:user_id])
+        connections = user.get_matches
+        render json: connections
     end
 
     private

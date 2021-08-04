@@ -6,20 +6,20 @@ function Track({ tracksData }) {
 
     return (
         ReactPlayer.canPlay(tracksData.song_url) ? (
-        <div>
-            <ReactPlayer
-            url = {`${tracksData.song_url}`}
-            width = '50%'
-            height = '30%'
-            config = {{ 
-                soundcloud: {
-                options: {
-                    sharing: true
-            }
+            <div>
+                <ReactPlayer
+                url = {`${tracksData.song_url}`}
+                width = '50%'
+                height = '30%'
+                config = {{ 
+                    soundcloud: {
+                    options: {
+                        sharing: true
                 }
-            }}
-            />
-        </div>) : null
+                    }
+                }}
+                />
+            </div>) : null
     )
 }
 
