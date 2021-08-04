@@ -32,6 +32,8 @@ function Profile({ user }) {
         const data = await res.json()
         if (res.ok) {
             setTracks([...tracks, data])
+            setTitle("")
+            setTrackURL("")
         }
     }
 
@@ -59,6 +61,7 @@ function Profile({ user }) {
                     Submit
                 </Button>
             </Form>
+            <br></br>
             {tracks.map((track, index) => {
                 return <Track key={index} tracksData={track} />
             })}
