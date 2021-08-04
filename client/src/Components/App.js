@@ -41,7 +41,9 @@ function App() {
 
   return (
     <div className="App">
+      {user ?
       <NavBar user = {user} logOut = {logOut}/>
+      : null}
 
       <Switch>
         <Route exact path = "/matches">

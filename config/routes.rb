@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :matches, except: [:update]
+  # resources :liked_users, except: [:update]
   resources :tracks
   resources :users, except: [:show, :create]
 

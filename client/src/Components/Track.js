@@ -5,11 +5,21 @@ import ReactPlayer from "react-player"
 function Track({ tracksData }) {
 
     return (
-        <div>
-            <ReactPlayer
-            url = "https://soundcloud.com/ghun-kenny-yoon/no-fam3"
-            />
-        </div>
+        ReactPlayer.canPlay(tracksData.song_url) ? (
+            <div>
+                <ReactPlayer
+                url = {`${tracksData.song_url}`}
+                width = '50%'
+                height = '30%'
+                config = {{ 
+                    soundcloud: {
+                    options: {
+                        sharing: true
+                }
+                    }
+                }}
+                />
+            </div>) : null
     )
 }
 

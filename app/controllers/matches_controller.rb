@@ -1,4 +1,4 @@
-class MatchesController < ApplicationController
+class LikedUsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     # skip_before_action :authorize, only: [:index]
     def index
