@@ -1,18 +1,32 @@
 class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-    # skip_before_action :authorize, only: [:create]
+    # skip_before_action :authorize, only: [:index]
 
     # wrap_parameters :user, include: [:username, :password, :age, :bio, :password_confirmation]
 
     def index
         user = User.find_by(id: session[:user_id])
+        users = []
         if user.user_type == "Rapper"
-            users = User.where(user_type: "Producer")
-            render json: users
+            users = User.producers
         else
-            users = User.where(user_type: "Rapper")
-            render json: users
+            users = User.rappers
         end
+        likees = []
+        user.liked_users.each do |liked|
+            likee = User.find_by(id: liked.liked_user_id)
+            likees << likee
+        end
+        displayed_users = users.select do |u|
+            truthy = true
+            likees.each do |l|
+                if l.id == u.id
+                    truthy = false
+                end
+            end
+            truthy
+        end
+        render json: displayed_users
     end
 
     def show
@@ -51,16 +65,16 @@ class UsersController < ApplicationController
         head :no_content
     end
 
-    def matches
-        user = User.find_by(id: session[:user_id])
-        connections = user.get_matches
-        render json: connections
-    end
+    # def matches
+    #     user = User.find_by(id: session[:user_id])
+    #     connections = user.get_matches
+    #     render json: connections
+    # end
 
     private
 
     def user_params
-        params.permit(:username, :user_type, :age, :bio, :password)
+        params.permit(:username, :user_type, :age, :bio, :password, :image_url)
     end
 
     def render_not_found

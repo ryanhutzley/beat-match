@@ -15,7 +15,27 @@ import { useHistory } from 'react-router-dom'
 
 function App() {
   const [user, setUser] = useState(null)
+  const [swipeUsers, setSwipeUsers] = useState([])
   let history = useHistory()
+
+
+  function shuffle(array) {
+    var currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
   useEffect(() => {
     async function getUser() {
@@ -28,6 +48,18 @@ function App() {
     }
     getUser()
   }, [])
+
+  useEffect(() => {
+    async function getSwipeUsers() {
+      const res = await fetch("/users")
+      if (res.ok) {
+        const json = await res.json()
+        let array = shuffle(json)
+        setSwipeUsers(array)
+      }
+    }
+    getSwipeUsers()
+  }, [user])
 
   async function logOut() {
     const res = await fetch("/logout", {
@@ -56,7 +88,7 @@ function App() {
           <Login onLogin={setUser}/>
         </Route> 
         <Route exact path = "/">
-          {user ? <Swipe /> : <Redirect to="/login" />}
+          {user ? <Swipe swipeUsers={swipeUsers}/> : <Redirect to="/login" />}
          </Route>
       </Switch>
     </div>

@@ -1,4 +1,4 @@
-class MatchessController < ApplicationController
+class MatchesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     # skip_before_action :authorize, only: [:index]
     def index
@@ -16,25 +16,22 @@ class MatchessController < ApplicationController
         match = Match.find(params[:id])
         render json: match
     end
-
-    def create
-        match = Match.create!(match_params)
-        render json: match
-    rescue ActiveRecord::RecordInvalid => e
-        render json: {error: e.record.errors.full_messages}, status: :unprocessable_entity
-    end
-
     
     def destroy
         user = User.find(session[:user_id])
-        type = user.user_type
-        if type == 'Rapper'
-            match = user.producer_matches.where(producer_id: params[:id]).first
+        if user.user_type == "Rapper"
+            match = Match.find_by(rapper_id: user.id, producer_id: params[:producer_id])
+            liked_user = LikedUser.find_by(liked_user_id: params[:producer_id], user_id: user.id)
+            match.destroy
+            liked_user.destroy
+            head :no_content
         else
-            match = user.rapper_matches.where(rapper_id: params[:id]).first
+            match = Match.find_by(rapper_id: params[:rapper_id], producer_id: user.id)
+            liked_user = LikedUser.find_by(liked_user_id: params[:rapper_id], user_id: user.id)
+            match.destroy
+            liked_user.destroy
+            head :no_content
         end
-        match.destroy
-        head :no_content
     end
 
     private

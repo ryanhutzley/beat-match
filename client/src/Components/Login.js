@@ -10,6 +10,7 @@ function Login({ onLogin }) {
     const [password, setPassword] = useState("")
     // const [passwordConf, setPasswordConf] = useState("")
     const [user_type, setUserType] = useState("Producer")
+    const [imageURL, setImageURL] = useState("")
     const [existingUser, setExistingUser] = useState(true)
     const [errors, setErrors] = useState([])
 
@@ -19,6 +20,7 @@ function Login({ onLogin }) {
         e.preventDefault()
         const userData = {
             username,
+            image_url: imageURL,
             user_type,
             age: parseInt(age),
             bio,
@@ -131,8 +133,24 @@ function Login({ onLogin }) {
                             <div className="col-md-6 mb-4">
 
                             <div className="form-outline">
+                                <input type="text" id="imageURL" className="form-control form-control-lg" value={imageURL} onChange={e => setImageURL(e.target.value)}/>
+                                <label className="form-label" htmlFor="firstName">Profile Pic URL</label>
+                            </div>
+
+                            </div>
+                            <div className="col-md-6 mb-4">
+
+                            <div className="form-outline">
                                 <input type="number" min="13" id="age" className="form-control form-control-lg" value={age} onChange={e => setAge(e.target.value)}/>
                                 <label className="form-label" htmlFor="age">Age</label>
+                            </div>
+
+                            </div>
+                            <div className="col-md-6 mb-4 pb-2">
+
+                            <div className="form-outline">
+                                <input type="password" id="password" className="form-control form-control-lg" value={password} onChange={e => setPassword(e.target.value)}/>
+                                <label className="form-label" htmlFor="password">Password</label>
                             </div>
 
                             </div>
@@ -151,18 +169,6 @@ function Login({ onLogin }) {
                                 <textarea type="bio" id="bio" className="form-control form-control-lg" value={bio} onChange={e => setBio(e.target.value)}/>
                                 <label className="form-label" htmlFor="bio">Bio</label>
                             </div>
-
-                            </div>
-                            <div className="col-md-6 mb-4 pb-2">
-
-                            <div className="form-outline">
-                                <input type="password" id="password" className="form-control form-control-lg" value={password} onChange={e => setPassword(e.target.value)}/>
-                                <label className="form-label" htmlFor="password">Password</label>
-                            </div>
-                            {/* <div className="form-outline">
-                                <input type="password" id="passwordConfirm" className="form-control form-control-lg" value={passwordConf} onChange={e => setPasswordConf(e.target.value)}/>
-                                <label className="form-label" htmlFor="passwordConfirm">Password Confirmation</label>
-                            </div> */}
 
                             </div>
                             

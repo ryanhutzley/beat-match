@@ -1,48 +1,21 @@
 class User < ApplicationRecord
     has_secure_password
 
-    has_many :rapper_matches, foreign_key: :producer_id, class_name: "Match"
+    has_many :rapper_matches, foreign_key: :producer_id, class_name: "Match", dependent: :destroy
     has_many :rappers, through: :rapper_matches
 
-    has_many :producer_matches, foreign_key: :rapper_id, class_name: "Match"
+    has_many :producer_matches, foreign_key: :rapper_id, class_name: "Match", dependent: :destroy
     has_many :producers, through: :producer_matches
 
-    has_many :liked_users
+    has_many :liked_users, dependent: :destroy
 
-    has_many :tracks
+    has_many :tracks, dependent: :destroy
 
-    def get_matches
-        if self.user_type == "Rapper"
-            producers = self.producers
-            matches = producers.select do |prod|
-                prod.rappers.each do |rapper|
-                    if rapper.id == self.id
-                        return true
-                    end
-                end
-                return false
-            end
-            return matches
-    
-        else
-            rappers = self.rappers
-            matches = rappers.select do |rapper|
-                rapper.producers.each do |prod|
-                    if prod.id == self.id
-                        return true
-                    end
-                end
-                return false
-            end
-            return matches
-        end
+    def self.rappers
+        self.where(user_type: "Rapper")
+    end
+
+    def self.producers
+        self.where(user_type: "Producer")
     end
 end
-
-  # has_many :requestees, foreign_key: :requestee_id, class_name: "LikedUser"
-    # # has_many :rappers, through: :requestees
-
-    # # has_many :requesters, foreign_key: :requester_id, class_name: "LikedUser"
-    # # has_many :producers, through: :liked_producers
-
-    # has_one :requester, foreign_key: :requester_id, class_name: "LikedUser"
