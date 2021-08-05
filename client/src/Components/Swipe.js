@@ -3,7 +3,7 @@ import {Carousel} from 'react-bootstrap'
 import { useState } from 'react'
 function Swipe({ swipeUsers }) {
     const [index, setIndex] = useState(0);
-    const [swipeTracks, setSwipeTracks] = useState([])
+    
     const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex)
     }
@@ -11,16 +11,28 @@ function Swipe({ swipeUsers }) {
     //     console.log('Next!')
     // }
 
-
-        async function getTracks(id) {
-            const res = await fetch(`/tracks/${id}`)
-            const tracksData = await res.json()
-            setSwipeTracks(tracksData)
-        }
-    
-
-
     function card(user) {
+        // fetch(`/tracks/${user.id}`)
+        // .then(res => res.json())
+        // .then(tracks=> {
+        //     return (
+        //         <Carousel.Item>
+        //         <img
+        //         className="d-block w-100"
+        //         src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
+        //         alt="First slide"
+        //         />
+        //         <Carousel.Caption>
+        //         <h3>{user.username}</h3>
+        //         <h4>{user.user_type}</h4>
+        //         <p>{user.bio}</p>
+        //         <button className="btn btn-danger"> Dislike</button>
+        //         <button className="btn btn-primary"> Like</button>
+        //         </Carousel.Caption>
+
+        //         </Carousel.Item>
+        //     )
+        // })
         return (
             <Carousel.Item>
                 <img
@@ -32,18 +44,17 @@ function Swipe({ swipeUsers }) {
                 <h3>{user.username}</h3>
                 <h4>{user.user_type}</h4>
                 <p>{user.bio}</p>
+                <button className="btn btn-danger"> Dislike</button>
+                <button className="btn btn-primary"> Like</button>
                 </Carousel.Caption>
-                <Carousel.Caption>
-                <button> Button</button>
-                </Carousel.Caption>
-
             </Carousel.Item>
         )
     }
+   
     return (
         <div className="container my-1">
         <Carousel indicators={false} activeIndex={index} onSelect={handleSelect}>
-                {swipeUsers.map((user, index)=> {
+                {swipeUsers.map((user)=> {
                    return card(user)
                })}
         </Carousel>

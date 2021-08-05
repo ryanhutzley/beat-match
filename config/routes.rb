@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, except: [:show, :create]
   resources :matches, only: [:index, :show, :destroy]
   resources :tags, only: [:index, :destroy, :create]
+  resources :track_tags, only: [:index, :create]
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

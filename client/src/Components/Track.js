@@ -2,13 +2,13 @@ import ReactPlayer from "react-player"
 import React from "react"
 
 
-function Track({ tracksData }) {
+function Track({ trackData }) {
 
     return (
-        ReactPlayer.canPlay(tracksData.song_url) ? (
+        ReactPlayer.canPlay(trackData.song_url) ? (
             <div>
                 <ReactPlayer
-                url = {`${tracksData.song_url}`}
+                url = {`${trackData.song_url}`}
                 width = '50%'
                 height = '30%'
                 config = {{ 
@@ -19,6 +19,9 @@ function Track({ tracksData }) {
                     }
                 }}
                 />
+                {trackData.tags.map(tag => {
+                    return <h3>{tag.genre}</h3>
+                })}
             </div>) : null
     )
 }

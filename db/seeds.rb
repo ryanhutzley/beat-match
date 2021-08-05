@@ -12,6 +12,8 @@ LikedUser.destroy_all
 LikedUser.reset_pk_sequence
 Tag.destroy_all
 Tag.reset_pk_sequence
+TrackTag.destroy_all
+TrackTag.reset_pk_sequence
 
 puts "Creating data"
 

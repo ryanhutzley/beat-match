@@ -2,15 +2,14 @@ class TracksController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     def index
-        user = User.find(session[:user_id])
+        user = User.find_by(id: session[:user_id])
         tracks = Track.where(user_id: user.id)
         render json: tracks
     end
 
     def show
-        user = User.find(params[:id])
-        tracks = Track.where(user_id: user.id)
-        render json: tracks
+        track = Track.find_by(id: params[:id])
+        render json: track
     end
 
     def create
@@ -43,6 +42,7 @@ class TracksController < ApplicationController
     def track_params
         params.permit(:id, :user_id, :title, :song_url)
     end
+
     def render_not_found
         render json: {error: "Not Found"}, status: 404
     end

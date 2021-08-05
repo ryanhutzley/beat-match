@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom'
 function App() {
   const [user, setUser] = useState(null)
   const [swipeUsers, setSwipeUsers] = useState([])
+  const [tags, setTags] = useState([])
   let history = useHistory()
 
 
@@ -61,6 +62,17 @@ function App() {
     getSwipeUsers()
   }, [user])
 
+  useEffect(() => {
+    async function getTags() {
+      const res = await fetch("/tags")
+      if (res.ok) {
+        const json = await res.json()
+        setTags(json)
+      }
+    }
+    getTags()
+  }, [])
+
   async function logOut() {
     const res = await fetch("/logout", {
       method: "DELETE"
@@ -79,10 +91,10 @@ function App() {
 
       <Switch>
         <Route exact path = "/matches">
-          {user ? <Matches /> : <Redirect to="/login" />}
+          {user ? <Matches user={user} /> : <Redirect to="/login" />}
         </Route>
         <Route exact path = "/profile">
-          {user ? <Profile user={user}/> : <Redirect to="/login" />}
+          {user ? <Profile user={user} tags={tags}/> : <Redirect to="/login" />}
         </Route>
         <Route exact path = "/login">
           <Login onLogin={setUser}/>
