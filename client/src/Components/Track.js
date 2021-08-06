@@ -5,8 +5,8 @@ import { Badge } from "react-bootstrap"
 
 function Track({ trackData, profileTrack }) {
 
-    console.log(trackData)
-    console.log(profileTrack)
+    // console.log(trackData)
+    // console.log(profileTrack)
 
     let track = {}
     trackData ? track = trackData : track = profileTrack

@@ -161,7 +161,7 @@ function Login({ onLogin }) {
                             <div className="col-md-6 mb-4">
 
                             <div className="form-outline">
-                                <input type="text" id="username" className="form-control form-control-lg" value={username} onChange={e => setUsername(e.target.value)}/>
+                                <input required type="text" id="username" className="form-control form-control-lg" value={username} onChange={e => setUsername(e.target.value)}/>
                                 <label className="form-label" htmlFor="firstName">Username</label>
                             </div>
 
@@ -177,7 +177,7 @@ function Login({ onLogin }) {
                             <div className="col-md-6 mb-4">
 
                             <div className="form-outline">
-                                <input type="number" min="13" id="age" className="form-control form-control-lg" value={age} onChange={e => setAge(e.target.value)}/>
+                                <input required type="number" min="13" id="age" className="form-control form-control-lg" value={age} onChange={e => setAge(e.target.value)}/>
                                 <label className="form-label" htmlFor="age">Age</label>
                             </div>
 
@@ -185,7 +185,7 @@ function Login({ onLogin }) {
                             <div className="col-md-6 mb-4 pb-2">
 
                             <div className="form-outline">
-                                <input type="password" id="password" className="form-control form-control-lg" value={password} onChange={e => setPassword(e.target.value)}/>
+                                <input required type="password" id="password" className="form-control form-control-lg" value={password} onChange={e => setPassword(e.target.value)}/>
                                 <label className="form-label" htmlFor="password">Password</label>
                             </div>
 
@@ -196,7 +196,7 @@ function Login({ onLogin }) {
                             <div className="col-md-6 login mb-6 pb-2">
 
                             <div className="form-outline">
-                                <textarea type="bio" id="bio" className="form-control form-control-lg" value={bio} onChange={e => setBio(e.target.value)}/>
+                                <textarea required type="bio" id="bio" className="form-control form-control-lg" value={bio} onChange={e => setBio(e.target.value)}/>
                                 <label className="form-label" htmlFor="bio">Bio</label>
                             </div>
 

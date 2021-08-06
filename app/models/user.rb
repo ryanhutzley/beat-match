@@ -11,6 +11,10 @@ class User < ApplicationRecord
 
     has_many :tracks, dependent: :destroy
 
+    vaidates :username, presence: true
+    validates :username, uniqueness: true
+    validates :password, presence: true
+
     def self.rappers
         self.where(user_type: "Rapper")
     end

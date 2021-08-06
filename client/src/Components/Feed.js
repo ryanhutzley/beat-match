@@ -15,11 +15,13 @@ function Feed({ tracks, tags }) {
         let filteredTracks  = tracks.forEach(track => {
             track.tags.forEach(tag => {
                 if (tag.genre === tagQuery || tagQuery === "Tag") {
-                    searchByTag.push(track)
+                    if (!searchByTag.includes(track)) {
+                        searchByTag.push(track)
+                    }    
                 }
             })
         })
-        let searchByUser = searchByTag.filter(track => track.user.username === userQuery || userQuery === "")
+        let searchByUser = searchByTag.filter(track => (track.user.username === userQuery) || userQuery === "")
         setDisplayedTracks(searchByUser)
     }
     
