@@ -77,7 +77,7 @@ function Login({ onLogin }) {
                 <div className="row justify-content-center align-items-center h-100">
                     <div className="col-12 col-lg-9 col-xl-7">
                         <div className="card shadow-2-strong card-registration" style={{borderRadius: "15px"}}>
-                            <div className="card-body p-4 p-md-5">
+                            <div className="card-body p-4 p-md-5" style={{marginBottom: '50px'}}>
                                 <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">BeatMatch Login</h3>
                                 <form onSubmit={handleLogin}>
                                     <div className="row ">
@@ -193,7 +193,7 @@ function Login({ onLogin }) {
                         </div>
 
                         <div className="row">
-                            <div className="col-md-6 login mb-4 pb-2">
+                            <div className="col-md-6 login mb-6 pb-2">
 
                             <div className="form-outline">
                                 <textarea type="bio" id="bio" className="form-control form-control-lg" value={bio} onChange={e => setBio(e.target.value)}/>
@@ -201,9 +201,13 @@ function Login({ onLogin }) {
                             </div>
 
                             </div>
-                            
+                            {errors !== [] ? 
+                            (<div>
+                                {errors.map((error, index)=> (<p style={{color: 'red'}} key={index}>{error}</p>))}
+                            </div>)
+                            : null} 
                         </div>
-                        <div className="mt-4 pt-2">
+                        <div className="mt-6 pt-2">
                             <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
                             <br/>
                             <br/>
@@ -212,11 +216,7 @@ function Login({ onLogin }) {
 
                         </form>
                     </div>
-                    {errors !== [] ? 
-                    (<div>
-                        {errors.map((error, index)=> (<p style={{color: 'red'}} key={index}>{error}</p>))}
-                    </div>)
-                    : null}
+                    
                     </div>
                 </div>
                 </div>

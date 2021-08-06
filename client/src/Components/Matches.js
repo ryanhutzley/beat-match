@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 function Matches(props) {
     const {user} = props
     const [matches, setMatches] = useState([])
+    const [deleteState, setDeleteState] = useState(false)
 
     useEffect(() => {
         async function getMatches() {
@@ -16,8 +17,15 @@ function Matches(props) {
         }
         getMatches()
         console.log("useEffectMatches")
-      }, [])
+      }, [deleteState])
 
+      function deleteMatch(id){
+        fetch(`/matches/${id}`, {
+            method: "DELETE"
+          })
+          .then(res => console.log(res))
+          .then(() => setDeleteState(!deleteState))
+    }
     return (
         <div className="container">
             <div className="row">
@@ -25,7 +33,7 @@ function Matches(props) {
                 <br></br>
                 <br></br>
                 <br></br>
-                {matches.length === 0 ? <h5>You don't have any matches yet</h5> : matches.map(match => <MatchCard {...match} user={user}/>)}
+                {matches.length === 0 ? <h5>You don't have any matches yet</h5> : matches.map(match => <MatchCard deleteMatch={deleteMatch} {...match} user={user}/>)}
             </div>
         </div>
     )
