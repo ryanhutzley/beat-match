@@ -6,10 +6,11 @@ class MatchesController < ApplicationController
         type = user.user_type
         if type == 'Rapper'
             matches = user.producer_matches
+            render json: matches
         else
             matches = user.rapper_matches
+            render json: matches
         end
-        render json: matches
     end
 
     def show
@@ -20,14 +21,14 @@ class MatchesController < ApplicationController
     def destroy
         user = User.find(session[:user_id])
         if user.user_type == "Rapper"
-            match = Match.find_by(rapper_id: user.id, producer_id: params[:producer_id])
-            liked_user = LikedUser.find_by(liked_user_id: params[:producer_id], user_id: user.id)
+            match = Match.find_by(rapper_id: user.id, producer_id: params[:id])
+            liked_user = LikedUser.find_by(liked_user_id: params[:id], user_id: user.id)
             match.destroy
             liked_user.destroy
             head :no_content
         else
-            match = Match.find_by(rapper_id: params[:rapper_id], producer_id: user.id)
-            liked_user = LikedUser.find_by(liked_user_id: params[:rapper_id], user_id: user.id)
+            match = Match.find_by(rapper_id: params[:id], producer_id: user.id)
+            liked_user = LikedUser.find_by(liked_user_id: params[:id], user_id: user.id)
             match.destroy
             liked_user.destroy
             head :no_content

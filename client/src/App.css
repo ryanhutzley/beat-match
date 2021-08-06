@@ -32,3 +32,78 @@
   color: black;
 
 } */
+
+.swipe-card {
+  width: 500px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(247, 233, 233)
+}
+
+.stats {
+  background: #f2f5f8 !important;
+  color: rgb(161, 159, 159) !important
+}
+
+.articles {
+  font-size: 10px;
+  color: #a1aab9
+}
+
+.number1 {
+  font-weight: 500
+}
+
+.followers {
+  font-size: 15px;
+  color: #000000
+}
+
+.number2 {
+  font-weight: 500
+}
+
+.rating {
+  font-size: 10px;
+  color: #a1aab9
+}
+
+.number3 {
+  font-weight: 500
+}
+body {
+  background-color: #f3ede5;
+  /* border-radius: 10px */
+}
+
+.navbar {
+  background-color: #e95420;
+}
+.nav-link {
+  color: rgba(255, 255, 255, 0.55);
+}
+.orange-btn{
+  background-color: #e95420;
+  border-color: #e95420;
+  width: 50%;
+  margin: auto;
+}
+
+.mt-5 {
+  margin-top: 1rem!important;
+}
+
+.mt-6 {
+  margin-top: 0px;
+}
+
+.mb-6 {
+  margin-bottom: 0px;
+}
+
+.login {
+  margin: auto;
+}
+h5{
+  text-align: center;
+}

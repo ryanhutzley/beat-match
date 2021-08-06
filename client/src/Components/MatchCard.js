@@ -1,24 +1,28 @@
 import React from 'react'
 
-export default function MatchCard() {
+export default function MatchCard(props) {
+     console.log(props.id)
+    function deleteMatch(){
+        fetch(`/matches/${props.id}`, {
+            method: "DELETE"
+          })
+          .then(res => console.log(res))
+    }
     return (
         
-        <div class="row">
         <div class="col-md-4 mt-4">
-            <div class="card profile-card-5">
+            <div class="profile-card profile-card-5">
                 <div class="card-img-block">
-                    <img class="card-img-top" src="https://images.unsplash.com/photo-1517832207067-4db24a2ae47c" alt="Card image cap"/>
+                    <img class="card-img-top" src={props.image_url} alt="Card image cap"/>
                 </div>
                 <div class="card-body pt-0">
-                <h5 class="card-title">Florence Garza</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title">{props.username}</h5>
+                <p class="card-text">{props.bio}</p>
                 
                 </div>
             </div>
-            <button type="button" class="btn btn-outline-danger btn-sm"><strong>Remove Match</strong></button>
+            <button onClick={deleteMatch} type="button" className="btn btn-outline-danger btn-sm"><strong>Remove Match</strong></button>
         </div>
         
-        
-    </div>
     )
 }

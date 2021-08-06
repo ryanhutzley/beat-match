@@ -18,17 +18,18 @@ TrackTag.reset_pk_sequence
 puts "Creating data"
 
 10.times do
-    User.create(username: Faker::Internet.username, image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Justin_Timberlake_by_Gage_Skidmore_2.jpg/1200px-Justin_Timberlake_by_Gage_Skidmore_2.jpg", user_type: "Rapper", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", password: "asdf")
+    User.create(username: Faker::Internet.username, user_type: "Rapper", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", password: "asdf")
 end
 
 10.times do
-    User.create(username: Faker::Internet.username, image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Justin_Timberlake_by_Gage_Skidmore_2.jpg/1200px-Justin_Timberlake_by_Gage_Skidmore_2.jpg", user_type: "Producer", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", password: "asdf")
+    User.create(username: Faker::Internet.username, user_type: "Producer", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", password: "asdf")
 end
 
 User.all.each do |r|
     Track.create(user_id: r.id, title: Faker::Ancient.god, song_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 end
 
+Tag.create(genre: "all")
 Tag.create(genre: "pop")
 Tag.create(genre: "country")
 Tag.create(genre: "hip-hop")

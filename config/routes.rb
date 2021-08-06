@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # resources :liked_users, except: [:update]
   resources :tracks
   resources :users, except: [:show, :create]
-  resources :matches, only: [:index, :show, :destroy]
+  resources :matches, only: [:show, :destroy]
   resources :tags, only: [:index, :destroy, :create]
   resources :track_tags, only: [:index, :create]
 
@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   post "/like", to: "liked_users#create"
   get "/getmatches", to: "liked_users#index"
+  get "/allliked", to: "liked_users#get_all"
+
+  get "/usermatches", to: "matches#index"
  
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

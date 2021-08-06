@@ -1,6 +1,11 @@
 class LikedUsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
+    def get_all
+        likes = LikedUser.all
+        render json: likes
+    end
+
     def index
         liker = User.find_by(id: session[:user_id])
         if liker.user_type == "Rapper"
@@ -10,7 +15,7 @@ class LikedUsersController < ApplicationController
                 likee_liked_users = LikedUser.where(user_id: u.liked_user_id)
                 likee_liked_users.each do |user|
                     if user.liked_user_id == liker.id
-                        Match.create(rapper_id: liker.id, producer_id: user.user_id)
+                        match = Match.create(rapper_id: liker.id, producer_id: user.user_id)
                         displayed_user = User.find_by(id: user.user_id)
                         likees << displayed_user
                     end
@@ -36,9 +41,16 @@ class LikedUsersController < ApplicationController
 
     def create
         user = User.find_by(id: session[:user_id])
-        liked_user = LikedUser.create(liked_user_params)
+        liked_user = LikedUser.create(user_id: session[:user_id], liked_user_id: params[:liked_user_id])
         if liked_user.valid?
-            render json: liked_user, status: :created
+            user2 = User.find_by(id: params[:liked_user_id])
+            
+            if user2.liked_users.any?{|u| u.liked_user_id == user.id}
+                # values_at(:liked_user_id).include?(user.id)
+                render json: {response: "match"}, status: :created
+            else
+                render json: {response: "no match"}, status: :created
+            end
         else
             render json: { errors: liked_user.errors.full_messages }, status: :unprocessable_entity
         end

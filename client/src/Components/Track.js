@@ -1,16 +1,25 @@
 import ReactPlayer from "react-player"
 import React from "react"
+import { Badge } from "react-bootstrap"
 
 
-function Track({ trackData }) {
+function Track({ trackData, profileTrack }) {
+
+    console.log(trackData)
+    console.log(profileTrack)
+
+    let track = {}
+    trackData ? track = trackData : track = profileTrack
 
     return (
-        ReactPlayer.canPlay(trackData.song_url) ? (
-            <div>
+        ReactPlayer.canPlay(track.song_url) ? (
+            <div style={{width: '80%', margin: 'auto'}}>
+                <br></br>
+                {trackData ? <h4>Posted by: {trackData.user.username}</h4> : null}
                 <ReactPlayer
-                url = {`${trackData.song_url}`}
-                width = '50%'
-                height = '30%'
+                url = {trackData ? `${trackData.song_url}` :  `${profileTrack.song_url}`}
+                width = '100%'
+                height = '50%'
                 config = {{ 
                     soundcloud: {
                     options: {
@@ -19,18 +28,34 @@ function Track({ trackData }) {
                     }
                 }}
                 />
-                {trackData.tags.map(tag => {
-                    return <h3>{tag.genre}</h3>
-                })}
+                {trackData ? (
+                trackData.tags.map(tag => {
+                    return (
+                        <>
+                            <h4 style={{display: 'inline-flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+                                <Badge bg="secondary">{tag.genre}</Badge>
+                            </h4>
+                            {" "}
+                        </>
+                    )
+                })) : (
+                profileTrack.tags.map(tag => {
+                    return (
+                        <>
+                            <h4 style={{display: 'inline-flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+                                <Badge bg="secondary">{tag.genre}</Badge>
+                            </h4>
+                            {" "}
+                        </>
+                    )
+                })
+                )
+            }
+                
             </div>) : null
     )
 }
 
 export default Track
-
-{/* <iframe style={{'width': "60%"}}src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/790184338%3Fsecret_token%3Ds-wdydxoiUXyF&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-<iframe style={{'width': "60%"}}src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/790184338%3Fsecret_token%3Ds-wdydxoiUXyF&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-<iframe style={{'width': "60%"}}src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/790184338%3Fsecret_token%3Ds-wdydxoiUXyF&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-<iframe style={{'width': "60%"}}src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/790184338%3Fsecret_token%3Ds-wdydxoiUXyF&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe> */}
 
 

@@ -16,11 +16,18 @@ function Login({ onLogin }) {
 
     let history = useHistory()
 
+    function handleClick() {
+        setExistingUser(!existingUser)
+        setErrors([])
+        setUsername("")
+        setPassword("")
+    }
+
     async function handleSignup(e) {
         e.preventDefault()
         const userData = {
             username,
-            image_url: imageURL,
+            image_url: (imageURL === "" ? "https://s.yimg.com/ny/api/res/1.2/.N2GYfm.grlO5KT6ErO3FA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM5OS42/https://s.yimg.com/os/creatr-uploaded-images/2021-02/572c4830-721d-11eb-bb63-96959c3b62f2" : imageURL),
             user_type,
             age: parseInt(age),
             bio,
@@ -74,7 +81,7 @@ function Login({ onLogin }) {
                                 <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">BeatMatch Login</h3>
                                 <form onSubmit={handleLogin}>
                                     <div className="row ">
-                                        <div className="col-md-6 mb-4" >
+                                        <div className="col-md-6 login mb-6" >
 
                                             <div className="form-outline">
                                                 <input type="text" id="username" className="form-control form-control-lg" value={username} onChange={e => setUsername(e.target.value)}/>
@@ -85,8 +92,6 @@ function Login({ onLogin }) {
                                                 <input type="password" id="password" className="form-control form-control-lg" value={password} onChange={e => setPassword(e.target.value)}/>
                                                 <label className="form-label" htmlFor="password">Password</label>
                                             </div>
-
-                                            <br></br>
                                         {/* error display */}
                                         {errors !== [] ? 
                                         (<div>
@@ -95,9 +100,11 @@ function Login({ onLogin }) {
                                         : null}
 
                                         </div>
-                                        <div className="mt-4 pt-2">
-                                            <input className="btn btn-primary btn-lg" type="submit" value="Submit" /> {" "}
-                                            <input className="btn btn-primary btn-lg" type="button" value="New to BeatMatch? Create Your Profile!" onClick={() => setExistingUser(!existingUser)} />
+                                        <div className="mt-6 pt-2">
+                                            <input className="btn btn-primary btn-lg" type="submit" value="Submit" /> 
+                                            <br/>
+                                            <br/>
+                                            <a  className="link"  onClick={handleClick}>New to BeatMatch? Create Your Profile!</a>
                                         </div>
 
                                         {/* <div className="mt-4 pt-2">
@@ -121,6 +128,35 @@ function Login({ onLogin }) {
                     <div className="card-body p-4 p-md-5">
                         <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">BeatMatch Signup</h3>
                         <form onSubmit={handleSignup}>
+                            <div className="col-md-6 login mb-4">
+
+                            <h6 className="mb-2 pb-1">User Role: </h6>
+
+                            <div className="form-check form-check-inline">
+                                <input
+                                className="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions"
+                                value="Producer"
+                                checked={user_type === "Producer"}
+                                onChange={e => setUserType(e.target.value)}
+                                />
+                                <label className="form-check-label" >Producer</label>
+                            </div>
+
+                            <div className="form-check form-check-inline">
+                                <input
+                                className="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions"
+                                value="Rapper"
+                                checked={user_type === "Rapper"}
+                                onChange={e => setUserType(e.target.value)}
+                                />
+                                <label className="form-check-label" >Rapper</label>
+                            </div>
+
+                            </div>
                         <div className="row">
                             <div className="col-md-6 mb-4">
 
@@ -156,14 +192,8 @@ function Login({ onLogin }) {
                             </div>
                         </div>
 
-                        {/* <div className="row">
-                            <div className="col-md-6 mb-4 d-flex align-items-center">
-
-                            </div>
-                        </div> */}
-
                         <div className="row">
-                            <div className="col-md-6 mb-4 pb-2">
+                            <div className="col-md-6 login mb-4 pb-2">
 
                             <div className="form-outline">
                                 <textarea type="bio" id="bio" className="form-control form-control-lg" value={bio} onChange={e => setBio(e.target.value)}/>
@@ -173,39 +203,11 @@ function Login({ onLogin }) {
                             </div>
                             
                         </div>
-                            <div className="col-md-6 mb-4">
-
-                            <h6 className="mb-2 pb-1">User Role: </h6>
-
-                            <div className="form-check form-check-inline">
-                                <input
-                                className="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                value="Producer"
-                                checked={user_type === "Producer"}
-                                onChange={e => setUserType(e.target.value)}
-                                />
-                                <label className="form-check-label" >Producer</label>
-                            </div>
-
-                            <div className="form-check form-check-inline">
-                                <input
-                                className="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                value="Rapper"
-                                checked={user_type === "Rapper"}
-                                onChange={e => setUserType(e.target.value)}
-                                />
-                                <label className="form-check-label" >Rapper</label>
-                            </div>
-
-                            </div>
-
                         <div className="mt-4 pt-2">
-                            <input className="btn btn-primary btn-lg" type="submit" value="Submit" /> {" "}
-                            <input className="btn btn-primary btn-lg" type="button" value="Back to Login Form" onClick={() => setExistingUser(!existingUser)}/>
+                            <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
+                            <br/>
+                            <br/>
+                            <a className="link"  onClick={handleClick}>Back to Login Form</a>
                         </div>
 
                         </form>

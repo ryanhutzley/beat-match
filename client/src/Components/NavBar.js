@@ -12,27 +12,33 @@ function NavBar({ user, logOut }) {
 
     return (
         <header>
-            <Navbar className="navbar" expand="lg" variant="primary">
+            <Navbar className="navbar"  variant="primary" sticky = "top" >
+                <Container className="container-fluid" id="navbar">
                 <Navbar.Brand> BeatMatch </Navbar.Brand>
-                <Container id="navbar">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/">
+                        <Nav.Link className="link" as={Link} to="/">
                         Swipe
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/matches">
+                        <Nav.Link className="link" as={Link} to="/matches">
                         Matches
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/profile">
+                        <Nav.Link className="link" as={Link} to="/profile">
                         Profile
                         </Nav.Link>
-                        <Nav.Link as={Link} onClick = {handleLogout} to="/login" >
+                        <Nav.Link className="link" as={Link} to="/feed">
+                        Feed
+                        </Nav.Link>
+                        <Nav.Link className="link" as={Link} onClick = {handleLogout} to="/login" >
                         {user ? "Logout" : "Login"}
                         </Nav.Link>
                     </Nav>
                 </Container>
-            <h3 style={{'fontSize': 'medium'}}>
-                {user ? `Welcome, ${user.username}` : null}
-            </h3>
+            <div>
+                <h3 style={{'fontSize': 'medium'}}>
+                    {user ? `Welcome, ${user.username}` : null}
+                </h3>
+                <img src={user.image_url} alt="profile pic" style={{width: '40px', height: '30px'}} />
+            </div>
             </Navbar>
         </header>
     )

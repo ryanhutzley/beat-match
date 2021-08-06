@@ -6,6 +6,7 @@ import Matches from './Matches';
 import Swipe from './Swipe';
 import Login from './Login';
 import Profile from './Profile';
+import Feed from './Feed';
 
 //importing react modules
 import React, { useState, useEffect } from 'react';
@@ -17,6 +18,8 @@ function App() {
   const [user, setUser] = useState(null)
   const [swipeUsers, setSwipeUsers] = useState([])
   const [tags, setTags] = useState([])
+  const [tracks, setTracks] = useState([])
+  const [errors, setErrors] = useState([])
   let history = useHistory()
 
 
@@ -37,6 +40,15 @@ function App() {
   
     return array;
   }
+
+  useEffect(() => {
+    async function getTracks() {
+        const res = await fetch("/tracks")
+        const tracksData = await res.json()
+        setTracks(tracksData)
+    }
+    getTracks()
+  }, [])
 
   useEffect(() => {
     async function getUser() {
@@ -83,6 +95,41 @@ function App() {
     }
   }
 
+  async function handleDeleteTrack(e) {
+    console.log(e.target.id)
+    let song_id = e.target.id
+    const res = await fetch(`/tracks/${song_id}`, {
+      method: "DELETE"
+    })
+    if (res.ok) {
+      let remainingTracks = tracks.filter(track => track.id != song_id)
+      setTracks(remainingTracks)
+    }
+  }
+
+  async function handleUserUpdate(updatedUser) {
+    const res = await fetch(`/users/${user.id}`, {
+      method: "PATCH",
+      headers: {"Content-type": "application/json"},
+      body: JSON.stringify(updatedUser)
+    })
+    const data = await res.json()
+    if (res.ok) {
+      setUser(data)
+      history.push("/")
+    } else {
+      setErrors(data.errors)
+    }
+  }
+
+  function handleUserDelete(e) {
+    e.preventDefault()
+    fetch(`/users/${user.id}`, {
+      method: "DELETE",
+    })
+    .then(() => logOut())
+  }
+
   return (
     <div className="App">
       {user ?
@@ -94,13 +141,16 @@ function App() {
           {user ? <Matches user={user} /> : <Redirect to="/login" />}
         </Route>
         <Route exact path = "/profile">
-          {user ? <Profile user={user} tags={tags}/> : <Redirect to="/login" />}
+          {user ? <Profile user={user} tags={tags} tracks={tracks} setTracks={setTracks} handleDeleteTrack={handleDeleteTrack} handleUserUpdate={handleUserUpdate} handleUserDelete={handleUserDelete} errors={errors}/> : <Redirect to="/login" />}
         </Route>
         <Route exact path = "/login">
           <Login onLogin={setUser}/>
         </Route> 
         <Route exact path = "/">
-          {user ? <Swipe swipeUsers={swipeUsers}/> : <Redirect to="/login" />}
+          {user ? <Swipe tracks={tracks} swipeUsers={swipeUsers} setSwipeUsers={setSwipeUsers}/> : <Redirect to="/login" />}
+         </Route>
+        <Route exact path = "/feed">
+          {user ? <Feed tracks={tracks} tags={tags}/> : <Redirect to="/login" />}
          </Route>
       </Switch>
     </div>

@@ -1,5 +1,5 @@
 class LikedUserSerializer < ActiveModel::Serializer
-  attributes :id
-  has_one :rapper
-  has_one :producer
+  attributes :id, :user_id, :liked_user_id
+  # has_one :rapper
+  # has_one :producer
 end

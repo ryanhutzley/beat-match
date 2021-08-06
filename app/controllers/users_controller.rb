@@ -60,7 +60,6 @@ class UsersController < ApplicationController
 
     def destroy
         user = User.find_by(id: session[:user_id])
-        user.session.delete
         user.destroy
         head :no_content
     end
