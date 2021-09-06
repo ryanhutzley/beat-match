@@ -13,7 +13,7 @@ export default function MatchCard(props) {
         <div class="col-md-4 mt-4">
             <div class="profile-card profile-card-5">
                 <div class="card-img-block">
-                    <img class="card-img-top" src={image_url} alt="Card image cap"/>
+                    <img class="card-img-top" src={image_url} alt="Profile picture"/>
                 </div>
                 <div class="card-body pt-0">
                 <h5 class="card-title">{username}</h5>

@@ -79,9 +79,11 @@ body {
 .navbar {
   background-color: #e95420;
 }
+
 .nav-link {
   color: rgba(255, 255, 255, 0.55);
 }
+
 .orange-btn{
   background-color: #e95420;
   border-color: #e95420;
@@ -108,3 +110,25 @@ body {
 h5{
   text-align: center;
 }
+
+.link {
+  cursor: pointer;
+}
+
+.loggedIn {
+  margin-bottom: 0px !important;
+}
+
+.orange {
+  color: #e95420;
+}
+
+.square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+/* .square {
+  width: 20%;
+} */

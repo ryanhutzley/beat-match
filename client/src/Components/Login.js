@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import logo from '../background_logo/logo-normal-5000-round.png'
 
 
 function Login({ onLogin }) {
@@ -13,6 +14,7 @@ function Login({ onLogin }) {
     const [imageURL, setImageURL] = useState("")
     const [existingUser, setExistingUser] = useState(true)
     const [errors, setErrors] = useState([])
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     let history = useHistory()
 
@@ -68,16 +70,35 @@ function Login({ onLogin }) {
         }
     }
 
+    window.addEventListener('onresize', () => setWindowWidth(window.innerWidth))
+
+    let style = ''
+    if (windowWidth > 415) {
+        style = '20%'
+    } else {
+        style = '50%'
+    }
 
     return (
         <>
         {existingUser ? (
         <section className="vh-100 gradient-custom">
-            <div className="container py-5 h-100">
-                <div className="row justify-content-center align-items-center h-100">
+            <div className="container h-100">
+                <br></br>
+                <br></br>
+                <img src={logo} alt="BeatMatch" className="square" style={{width: style}}/>
+                <br></br>
+                <br></br>
+                <div style={{display: 'block', width: '60vw', margin: 'auto', overflow: 'hidden'}}> 
+                    <h1>Welcome to <span className="orange">BeatMatch</span></h1> 
+                    <h2>Where rappers and producers can easily connect, network, and collaborate</h2>
+                    <h3>🎧 🎹 🎸🎤🎵🤝</h3>
+                </div>
+                <br></br>
+                <div className="row justify-content-center align-items-center">
                     <div className="col-12 col-lg-9 col-xl-7">
                         <div className="card shadow-2-strong card-registration" style={{borderRadius: "15px"}}>
-                            <div className="card-body p-4 p-md-5" style={{marginBottom: '50px'}}>
+                            <div className="card-body p-4 p-md-5">
                                 <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">BeatMatch Login</h3>
                                 <form onSubmit={handleLogin}>
                                     <div className="row ">
@@ -104,30 +125,39 @@ function Login({ onLogin }) {
                                             <input className="btn btn-primary btn-lg" type="submit" value="Submit" /> 
                                             <br/>
                                             <br/>
-                                            <a  className="link"  onClick={handleClick}>New to BeatMatch? Create Your Profile!</a>
-                                        </div>
-
-                                        {/* <div className="mt-4 pt-2">
-                                            <input className="btn btn-primary btn-lg" type="button" value="New to BeatMatch? Create Your Profile!" onClick={() => setExistingUser(!existingUser)} />
-                                        </div> */}
-                                        
+                                            <a  className="link" onClick={handleClick}>New to BeatMatch? Create Your Profile!</a>
+                                        </div>                                        
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br></br>
+                <br></br>
+                <br></br>
             </div>
         </section>
         ) : (
         <section className="vh-100 gradient-custom">
-            <div className="container py-5 h-100">
-                <div className="row justify-content-center align-items-center h-100">
+            <div className="container h-100">
+            <br></br>
+            <br></br>
+            <img src={logo} alt="BeatMatch" className="square" style={{width: style}}/>
+            <br></br>
+            <br></br>
+            <div style={{display: 'block', width: '60vw', margin: 'auto', overflow: 'hidden'}}>
+                <h1>Welcome to <span className="orange">BeatMatch</span></h1> 
+                <h2>Where rappers and producers can easily connect, network, and collaborate</h2>
+                <h3>🎧 🎹 🎸🎤🎵🤝</h3>
+            </div>
+            <br></br>
+            <div className="row justify-content-center align-items-center">
                 <div className="col-12 col-lg-9 col-xl-7">
                     <div className="card shadow-2-strong card-registration" style={{borderRadius: "15px"}}>
-                    <div className="card-body p-4 p-md-5">
-                        <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">BeatMatch Signup</h3>
-                        <form onSubmit={handleSignup}>
+                        <div className="card-body p-4 p-md-5">
+                            <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">BeatMatch Signup</h3>
+                            <form onSubmit={handleSignup}>
                             <div className="col-md-6 login mb-4">
 
                             <h6 className="mb-2 pb-1">User Role: </h6>
@@ -220,6 +250,9 @@ function Login({ onLogin }) {
                     </div>
                 </div>
                 </div>
+                <br></br>
+                <br></br>
+                <br></br>
             </div>
         </section>
         )}

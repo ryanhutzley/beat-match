@@ -18,18 +18,20 @@ TrackTag.reset_pk_sequence
 puts "Creating data"
 
 10.times do
-    User.create(username: Faker::Internet.username, user_type: "Rapper", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", password: "asdf")
+    User.create(username: Faker::Internet.username, user_type: "Rapper", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", image_url: Faker::Avatar.image, password: "asdf")
 end
 
 10.times do
-    User.create(username: Faker::Internet.username, user_type: "Producer", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", password: "asdf")
+    User.create(username: Faker::Internet.username, user_type: "Producer", age: rand(18..100), bio: "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...", image_url: Faker::Avatar.image, password: "asdf")
 end
+
+songs = ["https://soundcloud.com/ghun-kenny-yoon/410a", "https://soundcloud.com/ghun-kenny-yoon/euvn2", "https://soundcloud.com/ghun-kenny-yoon/218a", "https://soundcloud.com/ghun-kenny-yoon/116a", "https://soundcloud.com/ghun-kenny-yoon/rewt", "https://soundcloud.com/ghun-kenny-yoon/108a", "https://soundcloud.com/ghun-kenny-yoon/106a", "https://soundcloud.com/ghun-kenny-yoon/928a", "https://soundcloud.com/ghun-kenny-yoon/nxn2", "https://soundcloud.com/ghun-kenny-yoon/mix1"]
 
 User.all.each do |r|
-    Track.create(user_id: r.id, title: Faker::Ancient.god, song_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    Track.create(user_id: r.id, title: Faker::Ancient.god, song_url: songs.sample)
 end
 
-Tag.create(genre: "all")
+Tag.create(genre: "ALL")
 Tag.create(genre: "pop")
 Tag.create(genre: "country")
 Tag.create(genre: "hip-hop")
@@ -42,15 +44,15 @@ Track.all.each do |t|
 end
 
 
-LikedUser.create(liked_user_id: 5, user_id: 13)
-LikedUser.create(liked_user_id: 13, user_id: 5)
-LikedUser.create(liked_user_id: 4, user_id: 13)
-LikedUser.create(liked_user_id: 13, user_id: 4)
-LikedUser.create(liked_user_id: 1, user_id: 2)
-LikedUser.create(liked_user_id: 2, user_id: 1)
-LikedUser.create(liked_user_id: 1, user_id: 2)
-LikedUser.create(liked_user_id: 7, user_id: 1)
-LikedUser.create(liked_user_id: 9, user_id: 1)
+# LikedUser.create(liked_user_id: 5, user_id: 13)
+# LikedUser.create(liked_user_id: 13, user_id: 5)
+# LikedUser.create(liked_user_id: 4, user_id: 13)
+# LikedUser.create(liked_user_id: 13, user_id: 4)
+# LikedUser.create(liked_user_id: 1, user_id: 2)
+# LikedUser.create(liked_user_id: 2, user_id: 1)
+# LikedUser.create(liked_user_id: 1, user_id: 2)
+# LikedUser.create(liked_user_id: 7, user_id: 1)
+# LikedUser.create(liked_user_id: 9, user_id: 1)
 
 
 # Match.create(rapper_id: 5, producer_id: 13)

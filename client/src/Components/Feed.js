@@ -3,7 +3,7 @@ import { Form, DropdownButton, Dropdown, Button } from 'react-bootstrap'
 import { useState } from 'react'
 
 function Feed({ tracks, tags }) {
-    const [tagQuery, setTagQuery] = useState("Tag")
+    const [tagQuery, setTagQuery] = useState("All Tags")
     const [userQuery, setUserQuery] = useState("")
     const [displayedTracks, setDisplayedTracks] = useState(tracks)
 
@@ -14,7 +14,7 @@ function Feed({ tracks, tags }) {
         let searchByTag = []
         let filteredTracks  = tracks.forEach(track => {
             track.tags.forEach(tag => {
-                if (tag.genre === tagQuery || tagQuery === "Tag") {
+                if (tag.genre === tagQuery || tagQuery === "All Tags" || tagQuery === "ALL") {
                     if (!searchByTag.includes(track)) {
                         searchByTag.push(track)
                     }    

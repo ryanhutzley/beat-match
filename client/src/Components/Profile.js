@@ -256,7 +256,8 @@ function Profile({ user, tags, tracks, setTracks, handleDeleteTrack, handleUserU
                         <br></br>
                         <br></br>
                         <h2>Track List</h2>
-                        {filteredTracks.map((track, index) => {
+                        {filteredTracks.length > 0 ? (
+                            filteredTracks.map((track, index) => {
                             return (
                                 <div style={{width: "100%", margin: "auto"}}>
                                     <Track key={index} profileTrack={track} />
@@ -264,7 +265,8 @@ function Profile({ user, tags, tracks, setTracks, handleDeleteTrack, handleUserU
                                     <br></br>
                                 </div>
                             )
-                        })}
+                            })
+                        ) : <h3 style={{color: 'red'}}>No tracks to display</h3>}
                     </div>
                 </>
                 )

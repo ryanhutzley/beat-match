@@ -1,8 +1,11 @@
 import { Link, NavLink } from 'react-router-dom'
-import { Navbar, Container, Nav, NavItem } from "react-bootstrap"
+import { useState } from 'react'
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap"
 import { useHistory } from 'react-router-dom'
+import logo from "../background_logo/logo-normal-5000-round.png"
 
 function NavBar({ user, logOut }) {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     function handleLogout(e) {
         if (user) {
@@ -10,11 +13,21 @@ function NavBar({ user, logOut }) {
         }
     }
 
+    function handleDropdownClick(e) {
+        document.activeElement.blur()
+    }
+
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
+
     return (
-        <header>
-            <Navbar className="navbar"  variant="primary" sticky = "top" >
+        <>
+        {windowWidth > 576 ? (
+            <header>
+            <Navbar className="navbar"  variant="primary" sticky = "top" style={{minWidth: '100vw', minHeight: '10vh'}}>
                 <Container className="container-fluid" id="navbar">
-                <Navbar.Brand> BeatMatch </Navbar.Brand>
+                <Navbar.Brand>
+                    <img src={logo} width="40" height="40" alt="BeatMatch" />
+                </Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link className="link" as={Link} to="/">
                         Swipe
@@ -33,14 +46,38 @@ function NavBar({ user, logOut }) {
                         </Nav.Link>
                     </Nav>
                 </Container>
-            <div>
-                <h3 style={{'fontSize': 'medium'}}>
-                    {user ? `Welcome, ${user.username}` : null}
-                </h3>
-                <img src={user.image_url} alt="profile pic" style={{width: '40px', height: '30px'}} />
-            </div>
+                <div style={{display: 'flex', marginRight: '1.5vw', alignItems: 'center'}}>
+                    <h3 className='loggedIn' style={{fontSize: 'medium'}}>
+                        {user ? `Welcome ${user.username}` : null}
+                    </h3>
+                    <img src={user.image_url} alt="profile pic" style={{width: '40px', height: '30px'}} />
+                </div>
             </Navbar>
-        </header>
+        </header> ) : (
+            <Navbar className="navbar" variant="primary" sticky="top" style={{minWidth: '100vw', minHeight: '10vh'}}>
+                <Container className="container-fluid" id="navbar">
+                <Navbar.Brand>
+                    <img src={logo} width="40" height="40" alt="BeatMatch" />
+                </Navbar.Brand>
+                    <Nav className="me-auto">
+                        <NavDropdown title="Your Profile" id="basic-nav-dropdown">
+                            <NavDropdown.Item className="link" onClick={handleDropdownClick} as={Link} to="/">Swipe</NavDropdown.Item>
+                            <NavDropdown.Item className="link" onClick={handleDropdownClick} as={Link} to="/matches">Matches</NavDropdown.Item>
+                            <NavDropdown.Item className="link" onClick={handleDropdownClick} as={Link} to="/profile">Profile</NavDropdown.Item>
+                            <NavDropdown.Item className="link" onClick={handleDropdownClick} as={Link} to="/feed">Feed</NavDropdown.Item>
+                            <NavDropdown.Item className="link" as={Link} onClick = {handleLogout} to="/login">Logout</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                </Container>
+                <div style={{display: 'flex', marginRight: '1.5vw', alignItems: 'center'}}>
+                    <h3 className='loggedIn' style={{fontSize: 'medium'}}>
+                        {user ? `Welcome ${user.username}` : null}
+                    </h3>
+                    <img src={user.image_url} alt="profile pic" style={{width: '40px', height: '30px'}} />
+                </div>
+            </Navbar>
+        )}
+        </>
     )
 }
 
