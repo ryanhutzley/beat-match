@@ -33,7 +33,7 @@ function Matches(props) {
                 <br></br>
                 <br></br>
                 <br></br>
-                {matches.length === 0 ? <h5>You don't have any matches yet</h5> : matches.map(match => <MatchCard deleteMatch={deleteMatch} {...match} user={user}/>)}
+                {matches.length === 0 ? <h5>You don't have any matches yet</h5> : matches.map((match, index) => <MatchCard key={index} deleteMatch={deleteMatch} {...match} user={user}/>)}
             </div>
         </div>
     )

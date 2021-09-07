@@ -42,15 +42,6 @@ function App() {
   }
 
   useEffect(() => {
-    async function getTracks() {
-        const res = await fetch("/tracks")
-        const tracksData = await res.json()
-        setTracks(tracksData)
-    }
-    getTracks()
-  }, [])
-
-  useEffect(() => {
     async function getUser() {
       const res = await fetch("/me")
       if (res.ok) {
@@ -60,6 +51,15 @@ function App() {
       }
     }
     getUser()
+  }, [])
+
+  useEffect(() => {
+    async function getTracks() {
+        const res = await fetch("/tracks")
+        const tracksData = await res.json()
+        setTracks(tracksData)
+    }
+    getTracks()
   }, [])
 
   useEffect(() => {

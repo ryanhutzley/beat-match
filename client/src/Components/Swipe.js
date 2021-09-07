@@ -11,9 +11,6 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
     const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex)
     }
-    // function handleNext() {
-    //     console.log('Next!')
-    // }
 
     function card(user) {
         async function handleLike() {
@@ -40,11 +37,8 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
                 }
             }
         }
-        // function handleDislike() {
-        //     let newArray = swipeUsers.filter(i => i.id !== user.id)
-        //     setSwipeUsers(newArray)
-        // }
         
+        console.log(user)
         
         return (
             <Carousel.Item>
@@ -69,26 +63,26 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
                     }}
                     />
                 ):null}
-                <div class="container mt-5 d-flex justify-content-center" style={{color: 'coral'}}>
-                    <div class="swipe-card p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="image"> <img src={`${user.image_url}`} class="rounded" width="155"/> </div>
-                            <div class="ml-3 w-100">
-                                <h4 class="mb-0 mt-0">{user.username}</h4> <span>{user.user_type}</span>
+                <div className="container mt-5 d-flex justify-content-center" style={{color: 'coral'}}>
+                    <div className="swipe-card p-3">
+                        <div className="d-flex align-items-center">
+                            <div className="image"> <img src={`${user.image_url}`} className="rounded" width="155"/> </div>
+                            <div className="ml-3 w-100">
+                                <h4 className="mb-0 mt-0">{user.username}</h4> <span>{user.user_type}</span>
                                 <div>
-                                    {/* <div class="d-flex flex-column"> <span class="articles">Articles</span> <span class="number1">38</span> </div> */}
-                                    <div class="d-flex flex-column align-items-center"> <span class="number2">Age    {user.age}</span> </div>
+                                    {/* <div className="d-flex flex-column"> <span className="articles">Articles</span> <span className="number1">38</span> </div> */}
+                                    <div className="d-flex flex-column align-items-center"> <span className="number2">Age    {user.age}</span> </div>
                                 </div>
                                 <div className="button  mt-2 d-flex flex-row align-items-center">
-                                    <button onClick={handleLike} class="btn orange-btn btn-sm  ml-2" >Like</button>
+                                    <button onClick={handleLike} className="btn orange-btn btn-sm  ml-2" >Like</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                 </div>
-                <div class="container mt-5 d-flex justify-content-center" style={{color: 'coral'}}>
-                <div class="swipe-card p-3">
+                <div className="container mt-5 d-flex justify-content-center" style={{color: 'coral'}}>
+                <div className="swipe-card p-3">
                     <span>{user.bio}</span>
                 </div>
                 </div>
@@ -99,7 +93,7 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
     }
    let error_msg = (<div className = "text-danger">No swipes left!</div>)
     return (
-        <div className="container-md my-5" style={{width: '60%','background-repeat': 'no-repeat'}}>
+        <div className="container-md my-5" style={{width: '60%','backgroundRepeat': 'no-repeat'}}>
         <Carousel indicators={false} activeIndex={index} onSelect={handleSelect} interval={null}>
         {displayModal ? <MatchModal setDisplayModal={setDisplayModal} /> : null}
                 {swipeUsers.map((user)=> {
@@ -113,34 +107,3 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
 }
 
 export default Swipe
-    // <div className="container my-4">
-
-    //     <div id="swipes" className="carousel slide" data-mdb-ride="carousel">
-    //         <div className="carousel-inner">
-
-    //         <div className="carousel-item active">
-    //             <div className="col-md-6" style={{margin:"auto"}}>
-    //                 <div className="card mb-4">
-    //                     <img className="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg" alt="Card cap"/>
-    //                     <div className="card-body">
-    //                         <h4 className="card-title">Default Card</h4>
-    //                         <p className="card-title">Default card</p>
-    //                         <p className="card-text">Default Card</p>
-    //                         <button className="btn btn-primary">Like!</button>
-    //                         <button className="btn btn-danger">No Like!</button>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-
-    //            {swipeUsers.map((user, index)=> {
-    //                return <SwipeCard user={user} id = {index}/>
-    //            })}
-            
-            
-    //         <button className="carousel-control-prev" type="button" data-mdb-target="#swipes" data-mdb-slide="prev"></button>
-    //         <button onClick={handleNext} className="carousel-control-next" type="button" data-mdb-target="#swipes" data-mdb-slide="next"></button>
-    //         </div>
-        
-    //     </div>
-    // </div>

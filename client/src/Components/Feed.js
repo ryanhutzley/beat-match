@@ -24,6 +24,8 @@ function Feed({ tracks, tags }) {
         let searchByUser = searchByTag.filter(track => (track.user.username === userQuery) || userQuery === "")
         setDisplayedTracks(searchByUser)
     }
+
+    console.log(displayedTracks)
     
     return (
         <div>

@@ -2,13 +2,12 @@ class MatchesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     # skip_before_action :authorize, only: [:index]
     def index
-        user = User.find(session[:user_id])
-        type = user.user_type
+        type = @current_user.user_type
         if type == 'Rapper'
-            matches = user.producer_matches
+            matches = @current_user.producer_matches
             render json: matches
         else
-            matches = user.rapper_matches
+            matches = @current_user.rapper_matches
             render json: matches
         end
     end
@@ -19,16 +18,15 @@ class MatchesController < ApplicationController
     end
     
     def destroy
-        user = User.find(session[:user_id])
-        if user.user_type == "Rapper"
-            match = Match.find_by(rapper_id: user.id, producer_id: params[:id])
-            liked_user = LikedUser.find_by(liked_user_id: params[:id], user_id: user.id)
+        if @current_user.user_type == "Rapper"
+            match = Match.find_by(rapper_id: @current_user.id, producer_id: params[:id])
+            liked_user = LikedUser.find_by(liked_user_id: params[:id], user_id: @current_user.id)
             match.destroy
             liked_user.destroy
             head :no_content
         else
             match = Match.find_by(rapper_id: params[:id], producer_id: user.id)
-            liked_user = LikedUser.find_by(liked_user_id: params[:id], user_id: user.id)
+            liked_user = LikedUser.find_by(liked_user_id: params[:id], user_id: @current_user.id)
             match.destroy
             liked_user.destroy
             head :no_content

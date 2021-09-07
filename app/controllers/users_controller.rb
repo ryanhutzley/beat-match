@@ -1,19 +1,18 @@
 class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-    # skip_before_action :authorize, only: [:index]
+    skip_before_action :authorize, only: :create
 
     # wrap_parameters :user, include: [:username, :password, :age, :bio, :password_confirmation]
 
     def index
-        user = User.find_by(id: session[:user_id])
         users = []
-        if user.user_type == "Rapper"
+        if @current_user.user_type == "Rapper"
             users = User.producers
         else
             users = User.rappers
         end
         likees = []
-        user.liked_users.each do |liked|
+        @current_user.liked_users.each do |liked|
             likee = User.find_by(id: liked.liked_user_id)
             likees << likee
         end
@@ -30,45 +29,32 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find_by(id: session[:user_id])
-        if user
-            render json: user, status: :created
-        else
-            render json: { error: "Not authorized" }, status: :unauthorized
-        end
+        render json: @current_user
     end
 
     def create
         user = User.create(user_params)
         if user.valid?
             session[:user_id] = user.id
-            render json: user, status: :created
-        else
-            render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-        end
-    end
-
-    def update
-        user = User.find_by(id: session[:user_id])
-        user.update(user_params)
-        if user.valid?
             render json: user
         else
             render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
-    def destroy
-        user = User.find_by(id: session[:user_id])
-        user.destroy
-        head :no_content
+    def update
+        @current_user.update(user_params)
+        if @current_user.valid?
+            render json: @current_user
+        else
+            render json: { errors: @current_user.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
-    # def matches
-    #     user = User.find_by(id: session[:user_id])
-    #     connections = user.get_matches
-    #     render json: connections
-    # end
+    def destroy
+        @current_user.destroy
+        # head :no_content
+    end
 
     private
 

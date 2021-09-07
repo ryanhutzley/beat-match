@@ -7,7 +7,7 @@ class LikedUsersController < ApplicationController
     end
 
     def index
-        liker = User.find_by(id: session[:user_id])
+        liker = @current_user
         if liker.user_type == "Rapper"
             liked_users = LikedUser.where(user_id: liker.id)
             likees = []
@@ -40,12 +40,11 @@ class LikedUsersController < ApplicationController
     end
 
     def create
-        user = User.find_by(id: session[:user_id])
-        liked_user = LikedUser.create(user_id: session[:user_id], liked_user_id: params[:liked_user_id])
+        liked_user = LikedUser.create(user_id: @current_user.id, liked_user_id: params[:liked_user_id])
         if liked_user.valid?
             user2 = User.find_by(id: params[:liked_user_id])
             
-            if user2.liked_users.any?{|u| u.liked_user_id == user.id}
+            if user2.liked_users.any?{|u| u.liked_user_id == @current_user.id}
                 # values_at(:liked_user_id).include?(user.id)
                 render json: {response: "match"}, status: :created
             else
@@ -69,27 +68,5 @@ class LikedUsersController < ApplicationController
     def render_invalid
         render json: {error: "invalid"}, status: :unprocessable_entity
     end
-
-        # rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
-    # def index
-    #     users = User.all
-    #     users.each do |user|
-    #         if user.user_type == 'Rapper'
-    #             user.liked_users.each do |liked_user|
-    #                 liked = User.find(liked_user.liked_user_id)
-    #                 if (liked.liked_users.include?(user.id) && !Match.exists(rapper_id: user.id, producer_id: liked.id))
-    #                     Match.create!(rapper_id: user.id, producer_id: liked.id)
-    #                 end
-    #             end
-    #         else
-    #             user.liked_users.each do |liked_user|
-    #                 liked = User.find(liked_user.liked_user_id)
-    #                 if (liked.liked_users.include?(user.id) && !Match.exists(rapper_id: liked.id, producer_id: user.id))
-    #                     Match.create!(rapper_id: liked.id, producer_id: user.id)
-    #                 end
-    #             end
-    #         end
-    #     end
-    # end
 
 end

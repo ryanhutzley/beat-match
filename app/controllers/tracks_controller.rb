@@ -2,8 +2,6 @@ class TracksController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     def index
-        # user = User.find_by(id: session[:user_id])
-        # tracks = Track.where(user_id: user.id)
         tracks = Track.all.order('created_at DESC')
         render json: tracks.to_json(include: [:user, :tags])
     end
