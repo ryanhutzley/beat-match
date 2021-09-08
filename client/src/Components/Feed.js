@@ -25,7 +25,7 @@ function Feed({ tracks, tags }) {
         setDisplayedTracks(searchByUser)
     }
 
-    console.log(displayedTracks)
+    console.log(tracks)
     
     return (
         <div>
@@ -36,31 +36,27 @@ function Feed({ tracks, tags }) {
             <h5>Search by...</h5>
             <Form onSubmit={handleSearch}>
                 <div style={{display: 'inline-flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-                <Form.Group className="mb-3" type = "text">
-                    <DropdownButton id="dropdown-basic-button" title={tagQuery} style={{width: "100px", justifyContent: "space-between", margin: "10px"}}>
-                        {tags.map((tag, index) => {
-                            return <Dropdown.Item id={tag.genre} onClick={(e) => setTagQuery(e.target.id)} key={index}>{tag.genre}</Dropdown.Item>
-                        })}
-                    </DropdownButton>
-                </Form.Group>
-                <Form.Group style={{marginTop: '10px'}}>
-                    <Form.Control type="text" placeholder="Username" value={userQuery} onChange={e => setUserQuery(e.target.value)} />
-                </Form.Group>
-                {/* <DropdownButton id="dropdown-basic-button" title="Users" style={{width: "100px", justifyContent: "space-between", margin: "10px"}}>
-                    {tracks.map((track, index) => {
-                        return <Dropdown.Item id={track.user_id} onClick={(e) => console.log(e.target.id)} key={index}>{track.user.username}</Dropdown.Item>
-                    })}
-                </DropdownButton> */}
+                    <Form.Group type="text">
+                        <DropdownButton id="dropdown-basic-button" title={tagQuery} style={{width: "100px", margin: "10px"}}>
+                            {tags.map((tag, index) => {
+                                return <Dropdown.Item id={tag.genre} onClick={(e) => setTagQuery(e.target.id)} key={index}>{tag.genre}</Dropdown.Item>
+                            })}
+                        </DropdownButton>
+                    </Form.Group>
+                    <Form.Group style={{marginTop: '10px', width: '140px', marginRight: '10px'}}>
+                        <Form.Control type="text" placeholder="Username" value={userQuery} onChange={e => setUserQuery(e.target.value)} />
+                    </Form.Group>
                 </div>
-                <button className="btn orange-btn btn-sm  ml-2" style={{width: "100px", justifyContent: "space-between", margin: "20px"}}  type="submit">Search</button>
+                <button className="btn orange-btn btn-sm  ml-2" style={{width: "100px", height: '36px'}}  type="submit">Search</button>
             </Form>
-            <br></br>
-            <br></br>
+            {/* <br></br> */}
             <div style={{display: 'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column'}}>
                 {displayedTracks.map((track, index) => {
                     return <Track trackData={track} key={index} />
                 })}
             </div>
+            <br></br>
+            <br></br>
         </div>
     )
 }

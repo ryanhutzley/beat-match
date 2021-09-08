@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 import Track from './Track'
 
-function Profile({ user, tags, tracks, setTracks, handleDeleteTrack, handleUserUpdate, handleUserDelete, errors }) {
+function Profile({ user, tags, tracks, handleTrackAdd, handleDeleteTrack, handleUserUpdate, handleUserDelete, errors }) {
     // track form states
     const [title, setTitle] = useState("")
     const [trackURL, setTrackURL] = useState("")
@@ -87,7 +87,7 @@ function Profile({ user, tags, tracks, setTracks, handleDeleteTrack, handleUserU
         fetch(`/tracks/${id}`)
         .then(res => res.json())
         .then(song => {
-            setTracks([...tracks, song])
+            handleTrackAdd()
             setTag1("")
             setTag2("")
             setTag3("")
@@ -108,6 +108,8 @@ function Profile({ user, tags, tracks, setTracks, handleDeleteTrack, handleUserU
         }
         handleUserUpdate(updatedInfo)
     }
+
+    console.log(tracks)
 
     let filteredTracks = tracks.filter(track => track.user_id === user.id)
 
@@ -268,6 +270,8 @@ function Profile({ user, tags, tracks, setTracks, handleDeleteTrack, handleUserU
                             })
                         ) : <h3 style={{color: 'red'}}>No tracks to display</h3>}
                     </div>
+                    <br></br>
+                    <br></br>
                 </>
                 )
             }

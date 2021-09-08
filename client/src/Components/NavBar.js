@@ -4,7 +4,7 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap"
 import { useHistory } from 'react-router-dom'
 import logo from "../background_logo/logo-normal-5000-round.png"
 
-function NavBar({ user, logOut }) {
+function NavBar({ user, logOut, setErrors }) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     function handleLogout(e) {
@@ -15,6 +15,11 @@ function NavBar({ user, logOut }) {
 
     function handleDropdownClick(e) {
         document.activeElement.blur()
+        setErrors([])
+    }
+
+    function handleNavLinkClick() {
+        setErrors([])
     }
 
     window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
@@ -29,16 +34,16 @@ function NavBar({ user, logOut }) {
                     <img src={logo} width="40" height="40" alt="BeatMatch" />
                 </Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link className="link" as={Link} to="/">
+                        <Nav.Link className="link" onClick={handleNavLinkClick} as={Link} to="/">
                         Swipe
                         </Nav.Link>
-                        <Nav.Link className="link" as={Link} to="/matches">
+                        <Nav.Link className="link" onClick={handleNavLinkClick} as={Link} to="/matches">
                         Matches
                         </Nav.Link>
-                        <Nav.Link className="link" as={Link} to="/profile">
+                        <Nav.Link className="link" onClick={handleNavLinkClick} as={Link} to="/profile">
                         Profile
                         </Nav.Link>
-                        <Nav.Link className="link" as={Link} to="/feed">
+                        <Nav.Link className="link" onClick={handleNavLinkClick} as={Link} to="/feed">
                         Feed
                         </Nav.Link>
                         <Nav.Link className="link" as={Link} onClick = {handleLogout} to="/login" >

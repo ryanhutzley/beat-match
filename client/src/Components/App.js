@@ -20,8 +20,10 @@ function App() {
   const [tags, setTags] = useState([])
   const [tracks, setTracks] = useState([])
   const [errors, setErrors] = useState([])
+  const [tracksChecker, setTracksChecker] = useState(false)
   let history = useHistory()
 
+  console.log(user)
 
   function shuffle(array) {
     var currentIndex = array.length,  randomIndex;
@@ -60,7 +62,7 @@ function App() {
         setTracks(tracksData)
     }
     getTracks()
-  }, [])
+  }, [tracksChecker])
 
   useEffect(() => {
     async function getSwipeUsers() {
@@ -108,6 +110,7 @@ function App() {
   }
 
   async function handleUserUpdate(updatedUser) {
+    console.log(updatedUser)
     const res = await fetch(`/users/${user.id}`, {
       method: "PATCH",
       headers: {"Content-type": "application/json"},
@@ -130,10 +133,14 @@ function App() {
     .then(() => logOut())
   }
 
+  function handleTrackAdd() {
+    setTracksChecker(!tracksChecker)
+  }
+
   return (
     <div className="App">
       {user ?
-      <NavBar user = {user} logOut = {logOut}/>
+      <NavBar user={user} logOut={logOut} setErrors={setErrors} />
       : null}
 
       <Switch>
@@ -141,7 +148,7 @@ function App() {
           {user ? <Matches user={user} /> : <Redirect to="/login" />}
         </Route>
         <Route exact path = "/profile">
-          {user ? <Profile user={user} tags={tags} tracks={tracks} setTracks={setTracks} handleDeleteTrack={handleDeleteTrack} handleUserUpdate={handleUserUpdate} handleUserDelete={handleUserDelete} errors={errors}/> : <Redirect to="/login" />}
+          {user ? <Profile user={user} tags={tags} tracks={tracks} handleTrackAdd={handleTrackAdd} handleDeleteTrack={handleDeleteTrack} handleUserUpdate={handleUserUpdate} handleUserDelete={handleUserDelete} errors={errors}/> : <Redirect to="/login" />}
         </Route>
         <Route exact path = "/login">
           <Login onLogin={setUser}/>
