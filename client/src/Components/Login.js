@@ -95,7 +95,7 @@ function Login({ onLogin }) {
                 <br></br>
                 <div style={{display: 'block', width: '60vw', margin: 'auto', overflow: 'hidden'}}> 
                     <h1>Welcome to <span className="orange">BeatMatch</span></h1> 
-                    <h2>Where rappers and producers can easily connect, network, and collaborate</h2>
+                    <h2 style={{marginBottom: '20px'}}>Where rappers and producers can easily connect with other artists</h2>
                     <h3>🎧 🎹 🎸🎤🎵🤝</h3>
                 </div>
                 <br></br>
