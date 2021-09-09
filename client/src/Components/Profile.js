@@ -195,10 +195,10 @@ function Profile({ user, tags, tracks, handleTrackAdd, handleDeleteTrack, handle
         
                                     </div>
         
-                                <div className="mt-4 pt-2">
-                                    <input className="btn btn-primary btn-lg" type="submit" value="Save Changes" /> {" "}
-                                    <input className="btn btn-primary btn-lg" type="button" value="Add/Show Your Tracks!" onClick={() => setFormSelect(!formSelect)}/> {" "}
-                                    <input className="btn btn-danger btn-lg" type="button" value="Delete Profile" onClick={handleUserDelete} /> 
+                                <div className="mt-4" style={{display: 'inline-block'}}>
+                                    <input style={{margin: '5px'}} className="btn btn-primary btn-lg" type="submit" value="Save Changes" />
+                                    <input style={{margin: '5px'}} className="btn btn-primary btn-lg" type="button" value="Add/Show Your Tracks!" onClick={() => setFormSelect(!formSelect)}/>
+                                    <input style={{margin: '5px'}} className="btn btn-danger btn-lg" type="button" value="Delete Profile" onClick={handleUserDelete} /> 
                                 </div>
         
                                 </form>

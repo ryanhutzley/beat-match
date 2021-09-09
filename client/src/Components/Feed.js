@@ -11,6 +11,7 @@ function Feed({ tracks, tags }) {
 
     function handleSearch(e) {
         e.preventDefault()
+        document.activeElement.blur()
         let searchByTag = []
         let filteredTracks  = tracks.forEach(track => {
             track.tags.forEach(tag => {

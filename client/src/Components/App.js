@@ -58,11 +58,13 @@ function App() {
   useEffect(() => {
     async function getTracks() {
         const res = await fetch("/tracks")
-        const tracksData = await res.json()
-        setTracks(tracksData)
+        if (res.ok) {
+          const tracksData = await res.json()
+          setTracks(tracksData)
+        }
     }
     getTracks()
-  }, [tracksChecker])
+  }, [tracksChecker, user]) // tracksChecker and user? in dep array
 
   useEffect(() => {
     async function getSwipeUsers() {
@@ -85,7 +87,7 @@ function App() {
       }
     }
     getTags()
-  }, [])
+  }, [tracksChecker, user]) // tracksChecker and user? in dep array
 
   async function logOut() {
     const res = await fetch("/logout", {
@@ -93,6 +95,10 @@ function App() {
     })
     if (res.ok) {
       setUser(null)
+      setSwipeUsers([])
+      setTags([])
+      setTracks([])
+      setErrors([])
       history.push("/login")
     }
   }
@@ -136,6 +142,9 @@ function App() {
   function handleTrackAdd() {
     setTracksChecker(!tracksChecker)
   }
+
+  console.log(tracks)
+  console.log(tags)
 
   return (
     <div className="App">

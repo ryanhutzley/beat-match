@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
     def update
         @current_user.update(user_params)
-        byebug
+        # byebug
         if @current_user.valid?
             render json: @current_user
         else

@@ -65,7 +65,7 @@ function NavBar({ user, logOut, setErrors }) {
                     <img src={logo} width="40" height="40" alt="BeatMatch" />
                 </Navbar.Brand>
                     <Nav className="me-auto">
-                        <NavDropdown title="Your Profile" id="basic-nav-dropdown">
+                        <NavDropdown title="Your Account" id="basic-nav-dropdown">
                             <NavDropdown.Item className="link" onClick={handleDropdownClick} as={Link} to="/">Swipe</NavDropdown.Item>
                             <NavDropdown.Item className="link" onClick={handleDropdownClick} as={Link} to="/matches">Matches</NavDropdown.Item>
                             <NavDropdown.Item className="link" onClick={handleDropdownClick} as={Link} to="/profile">Profile</NavDropdown.Item>
