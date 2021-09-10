@@ -51,7 +51,7 @@ function NavBar({ user, logOut, setErrors }) {
                         </Nav.Link>
                     </Nav>
                 </Container>
-                <div style={{display: 'flex', marginRight: '1.5vw', alignItems: 'center'}}>
+                <div style={{display: 'flex', marginRight: '2vw', alignItems: 'center'}}>
                     <h3 className='loggedIn' style={{fontSize: 'medium'}}>
                         {user ? `Welcome ${user.username}` : null}
                     </h3>
@@ -74,12 +74,19 @@ function NavBar({ user, logOut, setErrors }) {
                         </NavDropdown>
                     </Nav>
                 </Container>
-                <div style={{display: 'flex', marginRight: '1.5vw', alignItems: 'center'}}>
-                    <h3 className='loggedIn' style={{fontSize: 'medium'}}>
-                        {user ? `Welcome ${user.username}` : null}
-                    </h3>
-                    <img src={user.image_url} alt="profile pic" style={{width: '40px', height: '30px'}} />
-                </div>
+                {user.username.length <= 7 ? (
+                    <div style={{display: 'flex', marginRight: '2vw', alignItems: 'center'}}>
+                        <h3 className='loggedIn' style={{fontSize: 'medium'}}>
+                            {user ? `Welcome ${user.username}` : null}
+                        </h3>
+                        <img src={user.image_url} alt="profile pic" style={{width: '40px', height: '30px'}} />
+                    </div> ) : (
+                    <div style={{justifyContent: 'left'}}> 
+                        <h3 className='loggedIn' style={{fontSize: 'small', marginRight: '2vw'}}>
+                            {user ? `Welcome ${user.username}` : null}
+                        </h3>
+                    </div>
+                    )}
             </Navbar>
         )}
         </>

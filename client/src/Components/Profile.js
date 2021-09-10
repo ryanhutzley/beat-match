@@ -24,6 +24,8 @@ function Profile({ user, tags, tracks, handleTrackAdd, handleDeleteTrack, handle
     const [bio, setBio] = useState(user.bio)
     const [userType, setUserType] = useState(user.user_type)
 
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
     console.log(tracks)
     
     async function addTrack(e) {
@@ -113,13 +115,15 @@ function Profile({ user, tags, tracks, handleTrackAdd, handleDeleteTrack, handle
 
     let filteredTracks = tracks.filter(track => track.user_id === user.id)
 
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
+
     // console.log(filteredTracks)
 
     return (
         <>
             {formSelect ?
                 (
-                    <section className="vh-100 gradient-custom">
+                    <section className="vh-90 gradient-custom">
                     <div className="container py-5 h-100">
                         <div className="row justify-content-center align-items-center h-100">
                         <div className="col-12 col-lg-9 col-xl-7">
@@ -220,7 +224,7 @@ function Profile({ user, tags, tracks, handleTrackAdd, handleDeleteTrack, handle
                         <Form onSubmit={addTrack}>
                             <Form.Group className="mb-3" type = "text">
                                 <Form.Label>Track Title</Form.Label>
-                                <Form.Control required type="text" placeholder="Name of your track" value={title} onChange={e => setTitle(e.target.value)} />
+                                <Form.Control required type="text" placeholder="Name of your track" value={title} onChange={e => setTitle(e.target.value)} style={{width: windowWidth < 768 ? '85%' : '', margin: 'auto'}} />
                                 <Form.Text className="text-muted">
                                 Unleash your creativity
                                 </Form.Text>
@@ -228,19 +232,19 @@ function Profile({ user, tags, tracks, handleTrackAdd, handleDeleteTrack, handle
         
                             <Form.Group className="mb-3" type = "text">
                                 <Form.Label>Track Link</Form.Label>
-                                <Form.Control required type="text" placeholder="Link to your track" value={trackURL} onChange={e => setTrackURL(e.target.value)}/>
+                                <Form.Control required type="text" placeholder="Link to your track" value={trackURL} onChange={e => setTrackURL(e.target.value)} style={{width: windowWidth < 768 ? '85%' : '', margin: 'auto'}}/>
                             </Form.Group>
                         
                             <Form.Group className="mb-3" type = "text">
                                 <Form.Label>Track Tags</Form.Label>
                                 <br></br>
-                                <div style={{display: 'inline-flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+                                <div style={{display: 'inline-flex', flexDirection: 'row', flexWrap: 'wrap', width: windowWidth < 768 ? '75%' : ''}}>
                                     <Form.Control style={{width: "100px", justifyContent: "space-between", margin: "10px"}} required type="text" placeholder="Tag 1" value={tag1} onChange={e => setTag1(e.target.value)}/>
-                                    <Form.Control style={{width: "100px", justifyContent: "space-between", margin: "10px"}} type="text" placeholder="Tag 2" value={tag2} onChange={e => setTag2(e.target.value)}/>
-                                    <Form.Control style={{width: "100px", justifyContent: "space-between", margin: "10px"}} type="text" placeholder="Tag 3" value={tag3} onChange={e => setTag3(e.target.value)}/>
-                                    <Form.Control style={{width: "100px", justifyContent: "space-between", margin: "10px"}} type="text" placeholder="Tag 4" value={tag4} onChange={e => setTag4(e.target.value)}/>
-                                    <Form.Control style={{width: "100px", justifyContent: "space-between", margin: "10px"}} type="text" placeholder="Tag 5" value={tag5} onChange={e => setTag5(e.target.value)}/>
-                                    <Form.Control style={{width: "100px", justifyContent: "space-between", margin: "10px"}} type="text" placeholder="Tag 6" value={tag6} onChange={e => setTag6(e.target.value)}/>
+                                    <Form.Control style={{width: "100px", justifyContent: "space-evenly", margin: "10px"}} type="text" placeholder="Tag 2" value={tag2} onChange={e => setTag2(e.target.value)}/>
+                                    <Form.Control style={{width: "100px", justifyContent: "space-evenly", margin: "10px"}} type="text" placeholder="Tag 3" value={tag3} onChange={e => setTag3(e.target.value)}/>
+                                    <Form.Control style={{width: "100px", justifyContent: "space-evenly", margin: "10px"}} type="text" placeholder="Tag 4" value={tag4} onChange={e => setTag4(e.target.value)}/>
+                                    <Form.Control style={{width: "100px", justifyContent: "space-evenly", margin: "10px"}} type="text" placeholder="Tag 5" value={tag5} onChange={e => setTag5(e.target.value)}/>
+                                    <Form.Control style={{width: "100px", justifyContent: "space-evenly", margin: "10px"}} type="text" placeholder="Tag 6" value={tag6} onChange={e => setTag6(e.target.value)}/>
                                 </div>
                             </Form.Group>
                             <div style={{display: 'inline-flex', flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -255,7 +259,6 @@ function Profile({ user, tags, tracks, handleTrackAdd, handleDeleteTrack, handle
                         </Form>
                     </div>
                     <div style={{display: 'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column'}}> 
-                        <br></br>
                         <br></br>
                         <h2>Track List</h2>
                         {filteredTracks.length > 0 ? (

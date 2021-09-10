@@ -10,11 +10,13 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
     const [displayModal, setDisplayModal] = useState(false)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex)
+        console.log(selectedIndex)
+        setIndex(selectedIndex)
     }
 
     function card(user) {
-        async function handleLike() {
+        async function handleLike(e) {
+            document.activeElement.blur()
             let obj = {
                 liked_user_id: user.id
             }
@@ -32,16 +34,16 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
                     setDisplayModal(true)
                 }
                 let newArray = swipeUsers.filter(i => i.id !== user.id)
+                // debugger
                 setSwipeUsers(newArray)
                 if (index >= newArray.length) {
                 setIndex(0)
+                // debugger
                 }
             }
         }
 
         window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
-        
-        console.log(windowWidth)
         
         return (
             <Carousel.Item>
@@ -95,14 +97,15 @@ function Swipe({ tracks, swipeUsers, setSwipeUsers }) {
             </Carousel.Item>
         )
     }
-   let error_msg = (<div className = "text-danger">No swipes left!</div>)
+   let error_msg = (<h1 className = "text-danger">No swipes left!</h1>)
+   console.log(index)
     return (
         <div className="container-md my-5" style={{width: windowWidth < 768 ? '95%' : '60%','backgroundRepeat': 'no-repeat'}}>
         <Carousel indicators={false} activeIndex={index} onSelect={handleSelect} interval={null}>
-        {displayModal ? <MatchModal setDisplayModal={setDisplayModal} /> : null}
-                {swipeUsers.map((user)=> {
+        {displayModal ? <MatchModal setDisplayModal={setDisplayModal} /> : (
+                swipeUsers.map((user)=> {
                    return card(user)
-               })}
+               }))}
         </Carousel>
         {(swipeUsers.length == 0) ? error_msg : null}
         </div>

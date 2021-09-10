@@ -28,13 +28,13 @@ function Matches(props) {
     }
     return (
         <div className="container">
+            <br></br>
             <div className="row">
-                <h2 style={{marginTop: "20px"}}>{user.username}'s Matches</h2>
-                <br></br>
-                <br></br>
-                <br></br>
+                <h2 style={{marginTop: "20px", marginBottom: '20px'}}>{user.username}'s Matches</h2>
                 {matches.length === 0 ? <h5>You don't have any matches yet</h5> : matches.map((match, index) => <MatchCard key={index} deleteMatch={deleteMatch} {...match} user={user}/>)}
             </div>
+            <br></br>
+            <br></br>
         </div>
     )
 }

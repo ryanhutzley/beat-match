@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.93872a0a.chunk.css",
+    "main.js": "/static/js/main.58cc3624.chunk.js",
+    "main.js.map": "/static/js/main.58cc3624.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a59c995d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a59c995d.js.map",
+    "static/css/2.d45d6843.chunk.css": "/static/css/2.d45d6843.chunk.css",
+    "static/js/2.5c647216.chunk.js": "/static/js/2.5c647216.chunk.js",
+    "static/js/2.5c647216.chunk.js.map": "/static/js/2.5c647216.chunk.js.map",
+    "static/js/3.152ecbea.chunk.js": "/static/js/3.152ecbea.chunk.js",
+    "static/js/3.152ecbea.chunk.js.map": "/static/js/3.152ecbea.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.d45d6843.chunk.css.map": "/static/css/2.d45d6843.chunk.css.map",
+    "static/css/main.93872a0a.chunk.css.map": "/static/css/main.93872a0a.chunk.css.map",
+    "static/js/2.5c647216.chunk.js.LICENSE.txt": "/static/js/2.5c647216.chunk.js.LICENSE.txt",
+    "static/media/logo-normal-5000-round.4493e6f2.png": "/static/media/logo-normal-5000-round.4493e6f2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a59c995d.js",
+    "static/css/2.d45d6843.chunk.css",
+    "static/js/2.5c647216.chunk.js",
+    "static/css/main.93872a0a.chunk.css",
+    "static/js/main.58cc3624.chunk.js"
+  ]
+}

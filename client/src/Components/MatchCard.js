@@ -8,7 +8,7 @@ export default function MatchCard(props) {
         <div className="col-md-4 mt-4">
             <div className="profile-card profile-card-5">
                 <div className="card-img-block">
-                    <img className="card-img-top" src={image_url} alt="Profile"/>
+                    <img className="card-img-top" src={image_url} alt="Profile" height="300px"/>
                 </div>
                 <div className="card-body pt-0">
                 <h5 className="card-title">{username}</h5>

@@ -6,7 +6,7 @@ export default function MatchModal(props) {
          props.setDisplayModal(false)
      }, 2000)
  },[])
- 
+
  return (
     <div className="modal fade show " id="exampleModalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle" style={{display: "block"}}>
       <div className="modal-dialog modal-dialog-centered" role="document">

@@ -32,7 +32,7 @@ function Feed({ tracks, tags }) {
         <div>
             <br></br>
             <h1>BeatMatch Feed</h1>
-            <h4>Hear the latest tracks from fellow BeatMatch users!</h4>
+            <h4 style={{width: '90vw', margin: 'auto'}}>Hear the latest tracks from fellow BeatMatch users!</h4>
             <br></br>
             <h5>Search by...</h5>
             <Form onSubmit={handleSearch}>

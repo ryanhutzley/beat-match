@@ -25,7 +25,7 @@ class MatchesController < ApplicationController
             liked_user.destroy
             head :no_content
         else
-            match = Match.find_by(rapper_id: params[:id], producer_id: user.id)
+            match = Match.find_by(rapper_id: params[:id], producer_id: @current_user.id)
             liked_user = LikedUser.find_by(liked_user_id: params[:id], user_id: @current_user.id)
             match.destroy
             liked_user.destroy
