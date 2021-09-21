@@ -1,9 +1,14 @@
+<div align="center">
+  
+<img src="https://github.com/ryanhutzley/beat-match/blob/main/client/src/icon/beatmatch_icon.png" alt="BeatMatch" width="200" height="200" />
+  
 # Flatiron Phase 4 Project - BeatMatch
+  
+</div>
 
 ## Description
 
-This project is scaffolded so that you can build a React frontend and Rails
-backend together, and easily deploy them to Heroku.
+BeatMatch is a matchmaking and music streaming platform for rappers and producers designed to promote musical collaboration. Profiles feature the user's music, playable in the app and visible to other users. 
 
 ## Requirements
 
@@ -33,4 +38,4 @@ You can use the following commands to run the application:
 
 ## Acknowledgements
 
-The frontend for this application was built using React, React Bootstrap, and ReactPlayer. The rails backend was configured using ActiveRecord, ActiveRecordSerializers, PostgreSQL, and BCrypt.
+This project was built by Zeus Ramirez, Kenny Ghun-Yoon, and Ryan Hutzley. The frontend for this application was built using React, React Bootstrap, and ReactPlayer. The rails backend was configured using ActiveRecord, ActiveRecordSerializers, PostgreSQL, and BCrypt.
