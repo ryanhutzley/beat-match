@@ -10,6 +10,8 @@
 
 BeatMatch is a matchmaking and music streaming platform for rappers and producers designed to promote musical collaboration. Profiles feature the user's music, playable in the app and visible to other users. 
 
+**Check out the live site [here](https://stormy-basin-28378.herokuapp.com/login)!**
+
 ## Requirements
 
 - Ruby 2.7.4
